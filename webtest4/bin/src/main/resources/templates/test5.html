@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+
+<title>TIMS WEB TEST</title>
+
+<!-- Custom fonts for this template-->
+<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
+	type="text/css">
+<link
+	href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+	rel="stylesheet">
+
+<!-- Custom styles for this template-->
+<link href="css/sb-admin-2.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+	<div id="wrapper">
+		<ul
+			class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
+			id="accordionSidebar">
+			<h1>
+				&nbsp; <span class="badge badge-secondary bg-primary">Tracom</span>
+			</h1>
+			<div class="card shadow mb-4">
+				<div class="card-header py-3">
+					<h6 class="m-0 font-weight-bold text-primary">DataTables
+						Example</h6>
+				</div>
+				<div class="card-body">
+					<div class="table-responsive">
+						<div id="dataTable_wrapper"
+							class="dataTables_wrapper dt-bootstrap4">
+							<div class="row">
+								<div class="col-sm-12 col-md-6">
+									<div class="dataTables_length" id="dataTable_length">
+										<label>Show <select name="dataTable_length"
+											aria-controls="dataTable"
+											class="custom-select custom-select-sm form-control form-control-sm"><option
+													value="10">10</option>
+												<option value="25">25</option>
+												<option value="50">50</option>
+												<option value="100">100</option></select> entries
+										</label>
+									</div>
+								</div>
+								<div class="col-sm-12 col-md-6">
+									<div id="dataTable_filter" class="dataTables_filter">
+										<label>Search:<input type="search"
+											class="form-control form-control-sm" placeholder=""
+											aria-controls="dataTable"></label>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-12">
+									<table class="table table-bordered dataTable" id="dataTable"
+										width="100%" cellspacing="0" role="grid"
+										aria-describedby="dataTable_info" style="width: 100%;">
+										<thead>
+											<tr role="row">
+												<th class="sorting_asc" tabindex="0"
+													aria-controls="dataTable" rowspan="1" colspan="1"
+													aria-sort="ascending"
+													aria-label="Name: activate to sort column descending"
+													style="width: 157px;">Name</th>
+												<th class="sorting" tabindex="0" aria-controls="dataTable"
+													rowspan="1" colspan="1"
+													aria-label="Position: activate to sort column ascending"
+													style="width: 257px;">Position</th>
+												<th class="sorting" tabindex="0" aria-controls="dataTable"
+													rowspan="1" colspan="1"
+													aria-label="Office: activate to sort column ascending"
+													style="width: 113px;">Office</th>
+												<th class="sorting" tabindex="0" aria-controls="dataTable"
+													rowspan="1" colspan="1"
+													aria-label="Age: activate to sort column ascending"
+													style="width: 49px;">Age</th>
+
+											</tr>
+										</thead>
+										<tfoot>
+											<tr>
+												<th rowspan="1" colspan="1">Name</th>
+												<th rowspan="1" colspan="1">Position</th>
+												<th rowspan="1" colspan="1">Office</th>
+												<th rowspan="1" colspan="1">Age</th>
+
+											</tr>
+										</tfoot>
+										<tbody>
+											<tr role="row" class="odd">
+												<td class="sorting_1">박대원</td>
+												<td>Accountant</td>
+												<td>Tokyo</td>
+												<td>33</td>
+
+											</tr>
+											<tr role="row" class="even">
+												<td class="sorting_1">Angelica Ramos</td>
+												<td>Chief Executive Officer (CEO)</td>
+												<td>London</td>
+												<td>47</td>
+
+											</tr>
+											<tr role="row" class="odd">
+												<td class="sorting_1">Ashton Cox</td>
+												<td>Junior Technical Author</td>
+												<td>San Francisco</td>
+												<td>66</td>
+
+											</tr>
+											<tr role="row" class="even">
+												<td class="sorting_1">Bradley Greer</td>
+												<td>Software Engineer</td>
+												<td>London</td>
+												<td>41</td>
+
+											</tr>
+											<tr role="row" class="odd">
+												<td class="sorting_1">Brenden Wagner</td>
+												<td>Software Engineer</td>
+												<td>San Francisco</td>
+												<td>28</td>
+
+											</tr>
+											<tr role="row" class="even">
+												<td class="sorting_1">Brielle Williamson</td>
+												<td>Integration Specialist</td>
+												<td>New York</td>
+												<td>61</td>
+
+											</tr>
+											<tr role="row" class="odd">
+												<td class="sorting_1">Bruno Nash</td>
+												<td>Software Engineer</td>
+												<td>London</td>
+												<td>38</td>
+
+											</tr>
+											<tr role="row" class="even">
+												<td class="sorting_1">Caesar Vance</td>
+												<td>Pre-Sales Support</td>
+												<td>New York</td>
+												<td>21</td>
+
+											</tr>
+											<tr role="row" class="odd">
+												<td class="sorting_1">Cara Stevens</td>
+												<td>Sales Assistant</td>
+												<td>New York</td>
+												<td>46</td>
+
+											</tr>
+											<tr role="row" class="even">
+												<td class="sorting_1">Cedric Kelly</td>
+												<td>Senior Javascript Developer</td>
+												<td>Edinburgh</td>
+												<td>22</td>
+
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-12 col-md-5">
+									<div class="dataTables_info" id="dataTable_info" role="status"
+										aria-live="polite">Showing 1 to 10 of 57 entries</div>
+								</div>
+								<div class="col-sm-12 col-md-7">
+									<div class="dataTables_paginate paging_simple_numbers"
+										id="dataTable_paginate">
+										<ul class="pagination">
+											<li class="paginate_button page-item previous disabled"
+												id="dataTable_previous"><a href="#"
+												aria-controls="dataTable" data-dt-idx="0" tabindex="0"
+												class="page-link">Previous</a></li>
+											<li class="paginate_button page-item active"><a href="#"
+												aria-controls="dataTable" data-dt-idx="1" tabindex="0"
+												class="page-link">1</a></li>
+											<li class="paginate_button page-item "><a href="#"
+												aria-controls="dataTable" data-dt-idx="2" tabindex="0"
+												class="page-link">2</a></li>
+											<li class="paginate_button page-item "><a href="#"
+												aria-controls="dataTable" data-dt-idx="3" tabindex="0"
+												class="page-link">3</a></li>
+											<li class="paginate_button page-item "><a href="#"
+												aria-controls="dataTable" data-dt-idx="4" tabindex="0"
+												class="page-link">4</a></li>
+											<li class="paginate_button page-item "><a href="#"
+												aria-controls="dataTable" data-dt-idx="5" tabindex="0"
+												class="page-link">5</a></li>
+											<li class="paginate_button page-item "><a href="#"
+												aria-controls="dataTable" data-dt-idx="6" tabindex="0"
+												class="page-link">6</a></li>
+											<li class="paginate_button page-item next"
+												id="dataTable_next"><a href="#"
+												aria-controls="dataTable" data-dt-idx="7" tabindex="0"
+												class="page-link">Next</a></li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</ul>
+		<div id="content-wrapper" class="d-flex flex-column">
+			<div id="content">
+
+				<!-- Topbar -->
+				<nav
+					class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+
+					<ul class="navbar-nav ml-auto">
+						<a href="#" class="btn btn-primary btn-icon-split"> <span
+							class="icon text-white-50"> <i class="fas fa-flag"></i>
+						</span> <span class="text">추가</span>
+						</a>
+						<a href="#" class="btn btn-danger btn-icon-split"> <span
+							class="icon text-white-50"> <i class="fas fa-trash"></i>
+						</span> <span class="text">삭제</span>
+						</a>
+					</ul>
+
+
+				</nav>
+				<!-- End of Topbar -->
+
+				<!-- Begin Page Content -->
+
+				<div class="container-fluid">
+
+					<!-- Page Heading -->
+					<h1 class="h3 mb-1 text-gray-800">중간내용</h1>
+					<p class="mb-4">
+						안녕하세요 <a href="https://getbootstrap.com/docs">Bootstrap
+							Documentation</a> ㅋㅋ
+					</p>
+
+					<!-- Content Row -->
+					<div class="row">
+
+						<!-- Grow In Utility -->
+						<div class="col-lg-3">
+
+
+							<div class="card position-relative">
+								<div class="card-header py-3">
+									<h6 class="m-0 font-weight-bold text-primary">Header</h6>
+								</div>
+								<div class="card-body">
+
+
+
+									<label>Protocol Indicator:
+										<div class="dropdown">
+											<button class="btn btn-secondary dropdown-toggle"
+												type="button" id="dropdownMenuButton" data-toggle="dropdown"
+												aria-haspopup="true" aria-expanded="false">A</button>
+											<div class="dropdown-menu"
+												aria-labelledby="dropdownMenuButton">
+												<a class="dropdown-item" href="#">Action</a> <a
+													class="dropdown-item" href="#">Another action</a> <a
+													class="dropdown-item" href="#">Something else here</a>
+											</div>
+										</div>
+									</label> <label>Header Size:<input type="search"
+										class="form-control form-control-sm" placeholder=""
+										aria-controls="dataTable">
+									</label> <label>Protocol Version:<input type="search"
+										class="form-control form-control-sm" placeholder=""
+										aria-controls="dataTable">
+									</label> <label>Packet ID:<input type="search"
+										class="form-control form-control-sm" placeholder=""
+										aria-controls="dataTable">
+									</label> <label>Protocol Option:
+										<div class="dropdown">
+											<button class="btn btn-secondary dropdown-toggle"
+												type="button" id="dropdownMenuButton" data-toggle="dropdown"
+												aria-haspopup="true" aria-expanded="false">선택 없음</button>
+											<div class="dropdown-menu"
+												aria-labelledby="dropdownMenuButton">
+												<a class="dropdown-item" href="#">Action</a> <a
+													class="dropdown-item" href="#">Another action</a> <a
+													class="dropdown-item" href="#">Something else here</a>
+											</div>
+										</div>
+									</label> &nbsp; <label>OP Code:
+										<div class="dropdown">
+											<button class="btn btn-secondary dropdown-toggle"
+												type="button" id="dropdownMenuButton" data-toggle="dropdown"
+												aria-haspopup="true" aria-expanded="false">
+												OP_GET_REQ</button>
+											<div class="dropdown-menu"
+												aria-labelledby="dropdownMenuButton">
+												<a class="dropdown-item" href="#">Action</a> <a
+													class="dropdown-item" href="#">Another action</a> <a
+													class="dropdown-item" href="#">Something else here</a>
+											</div>
+										</div>
+									</label> <label>APDU Length:<input type="search"
+										class="form-control form-control-sm" placeholder=""
+										aria-controls="dataTable"></label>
+
+									<table class="table table-bordered">
+										<thead>
+											<tr>
+												<th scope="col">#</th>
+												<th scope="col">SID</th>
+												<th scope="col">DID</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<th scope="row">ServiceID</th>
+												<td><input class="form-control form-control-sm"
+													type="text"></td>
+												<td><input class="form-control form-control-sm"
+													type="text"></td>
+
+											</tr>
+											<tr>
+												<th scope="row">GroupID</th>
+												<td><input class="form-control form-control-sm"
+													type="text"></td>
+												<td><input class="form-control form-control-sm"
+													type="text"></td>
+
+											</tr>
+											<tr>
+												<th scope="row">SystemID</th>
+												<td><input class="form-control form-control-sm"
+													type="text"></td>
+												<td><input class="form-control form-control-sm"
+													type="text"></td>
+											</tr>
+										</tbody>
+									</table>
+
+
+								</div>
+							</div>
+
+						</div>
+
+						<!-- Grow In Utility -->
+						<div class="col-lg-2">
+
+							<div class="card position-relative">
+								<div class="card-header py-3">
+									<h6 class="m-0 font-weight-bold text-primary">CRC/CheckSum</h6>
+								</div>
+								<div class="card-body">
+									<div class="mb-3">
+										<code>.animated--fade-in</code>
+									</div>
+									<div class="small mb-1">Navbar Dropdown Example:</div>
+
+									<div class="small mb-1">Dropdown Button Example:</div>
+									<div class="dropdown mb-4">
+										<button class="btn btn-primary dropdown-toggle" type="button"
+											id="dropdownMenuButton" data-toggle="dropdown"
+											aria-haspopup="true" aria-expanded="false">Dropdown
+										</button>
+										<div class="dropdown-menu animated--fade-in"
+											aria-labelledby="dropdownMenuButton" style="">
+											<a class="dropdown-item" href="#">Action</a> <a
+												class="dropdown-item" href="#">Another action</a> <a
+												class="dropdown-item" href="#">Something else here</a>
+										</div>
+									</div>
+
+
+									<p class="mb-0 small">Note: This utility animates the CSS
+										opacity property, meaning it will override any existing
+										opacity on an element being animated!</p>
+								</div>
+							</div>
+
+							<div class="card position-relative">
+								<div class="card-header py-3">
+									<h6 class="m-0 font-weight-bold text-primary">Option</h6>
+								</div>
+								<div class="card-body">
+									<div class="mb-3">
+										<code>.animated--fade-in</code>
+									</div>
+									<div class="small mb-1">Navbar Dropdown Example:</div>
+
+									<div class="small mb-1">Dropdown Button Example:</div>
+									<div class="dropdown mb-4">
+										<button class="btn btn-primary dropdown-toggle" type="button"
+											id="dropdownMenuButton" data-toggle="dropdown"
+											aria-haspopup="true" aria-expanded="false">Dropdown
+										</button>
+										<div class="dropdown-menu animated--fade-in"
+											aria-labelledby="dropdownMenuButton" style="">
+											<a class="dropdown-item" href="#">Action</a> <a
+												class="dropdown-item" href="#">Another action</a> <a
+												class="dropdown-item" href="#">Something else here</a>
+										</div>
+									</div>
+
+
+
+								</div>
+							</div>
+
+
+						</div>
+
+						<!-- Fade In Utility -->
+						<div class="col-lg-7">
+
+
+
+
+
+
+
+							<div class="card position-relative">
+								<div class="card-header py-3">
+									<h6 class="m-0 font-weight-bold text-primary">Payload</h6>
+								</div>
+								<div class="card-body">
+									<div class="mb-3">
+										<code>.animated--grow-in</code>
+									</div>
+									<div class="small mb-1">Navbar Dropdown Example:</div>
+
+
+									<div class="form-group">
+										<label for="exampleFormControlTextarea1">Example
+											textarea</label>
+										<textarea class="form-control"
+											id="exampleFormControlTextarea1" rows="3"></textarea>
+									</div>
+
+
+								</div>
+							</div>
+
+
+
+
+
+
+
+
+
+
+							<div class="card position-relative">
+								<div class="card-header py-3">
+									<h6 class="m-0 font-weight-bold text-primary">Result</h6>
+								</div>
+								<div class="card-body">
+									<div class="mb-3">
+										<code>.animated--fade-in</code>
+									</div>
+
+
+									<div class="small mb-1">Dropdown Button Example:</div>
+									<div class="dropdown mb-4">
+										<button class="btn btn-primary dropdown-toggle" type="button"
+											id="dropdownMenuButton" data-toggle="dropdown"
+											aria-haspopup="true" aria-expanded="false">Dropdown
+										</button>
+										<div class="dropdown-menu animated--fade-in"
+											aria-labelledby="dropdownMenuButton" style="">
+											<a class="dropdown-item" href="#">Action</a> <a
+												class="dropdown-item" href="#">Another action</a> <a
+												class="dropdown-item" href="#">Something else here</a>
+										</div>
+									</div>
+
+									<div class="form-group">
+										<label for="exampleFormControlTextarea1">Example
+											textarea</label>
+										<textarea class="form-control"
+											id="exampleFormControlTextarea1" rows="3"></textarea>
+									</div>
+									<p class="mb-0 small">Note: This utility animates the CSS
+										opacity property, meaning it will override any existing
+										opacity on an element being animated!</p>
+								</div>
+
+
+							</div>
+
+
+
+
+						</div>
+
+					</div>
+					<div class="container-fluid"></div>
+				</div>
+			</div>
+		</div>
+
+
+		<!-- Optional JavaScript -->
+		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+			integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+			crossorigin="anonymous"></script>
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"
+			integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4"
+			crossorigin="anonymous"></script>
+		<script
+			src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"
+			integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1"
+			crossorigin="anonymous"></script>
+</body>
+</html>
