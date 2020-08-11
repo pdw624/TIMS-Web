@@ -4,9 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import com.example.client.NettyClient;
 import com.example.domain.MainVO;
 import com.example.service.MainService;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +18,7 @@ import lombok.extern.log4j.Log4j2;
 @Controller
 @Log4j2
 public class MainController {
-
+	
 	@Autowired
 	private MainService service;
 	
@@ -29,4 +32,28 @@ public class MainController {
 		model.addAttribute("testList", testList);
 		return "test5";
 	}
+	
+	@RequestMapping("/index")
+	public String headerSize(@RequestParam("headerSize") String headerSize, Model model) {
+		
+		System.out.println("@RequestParam : "+ headerSize);
+		model.addAttribute("headerSize", headerSize);
+		
+		NettyClient nc = new NettyClient();
+		try {
+            nc.connect(8085, "192.168.34.6");
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+		return "index";
+	}
+//	@RequestMapping("/index") 
+//	public String response(Model model){
+//		model.addAttribute("value1", strTemp);  
+//		return "index";
+//	}
+
+	
+	
 }
