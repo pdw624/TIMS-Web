@@ -6,6 +6,8 @@ import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import io.netty.handler.logging.LogLevel;
+import io.netty.handler.logging.LoggingHandler;
 
 public class NettyClient {
 
@@ -24,7 +26,9 @@ public class NettyClient {
                         ch.pipeline().addLast(new SimpleByteToMessageDecoder());
                         ch.pipeline().addLast(new ClientHandler());
                     }
-                });
+                })
+                .handler(new LoggingHandler(LogLevel.INFO));
+                
         
             //同步等待
             ChannelFuture future = bootstrap.connect(host, port).sync();       

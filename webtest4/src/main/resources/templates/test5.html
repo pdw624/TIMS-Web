@@ -146,15 +146,26 @@
 
 										<label>Header Size: <input type="search"
 											name="headerSize" id="headerSize"
-											class="form-control form-control-sm" placeholder="123"
+											class="form-control form-control-sm" placeholder="헤더사이즈"
+											onfocus="this.placeholder=''" onblur="this.placeholder='헤더사이즈'"
 											aria-controls="dataTable">
-										</label> <label>Protocol Version:<input type="search"
-											class="form-control form-control-sm" placeholder=""
+										</label>
+										
+										<label>Protocol Version:<input type="search"
+											name="protocolVersion" id="protocolVersion"
+											class="form-control form-control-sm" placeholder="프로토콜버전"
+											onfocus="this.placeholder=''" onblur="this.placeholder='프로토콜버전'"
 											aria-controls="dataTable">
-										</label> <label>Packet ID:<input type="search"
-											class="form-control form-control-sm" placeholder=""
+										</label>
+										
+										<label>Packet ID:<input type="search"
+											name="packetID" id="packetID"
+											class="form-control form-control-sm" placeholder="패킷ID"
+											onfocus="this.placeholder=''" onblur="this.placeholder='패킷ID'"
 											aria-controls="dataTable">
-										</label> <label>Protocol Option:
+										</label>
+										
+										<label>Protocol Option:
 											<div class="dropdown">
 												<button class="btn btn-secondary dropdown-toggle"
 													type="button" id="dropdownMenuButton"
@@ -167,7 +178,9 @@
 														class="dropdown-item" href="#">Something else here</a>
 												</div>
 											</div>
-										</label> &nbsp;&nbsp; <label>OP Code:
+										</label> &nbsp;&nbsp; 
+										
+										<label>OP Code:
 											<div class="dropdown">
 												<button class="btn btn-secondary dropdown-toggle"
 													type="button" id="dropdownMenuButton"
@@ -180,10 +193,15 @@
 														class="dropdown-item" href="#">Something else here</a>
 												</div>
 											</div>
-										</label> <label>APDU Length:<input type="search"
-											class="form-control form-control-sm" placeholder=""
-											aria-controls="dataTable"></label>
-
+										</label>
+										
+										<label>APDU Length:<input type="search"
+											name="apduLength" id="apduLength"
+											class="form-control form-control-sm" placeholder="페이로드길이"
+											onfocus="this.placeholder=''" onblur="this.placeholder='페이로드길이'"
+											aria-controls="dataTable">
+										</label>
+										
 										<table class="table table-bordered">
 											<thead>
 												<tr>
@@ -195,26 +213,38 @@
 											<tbody>
 												<tr>
 													<th scope="row">ServiceID</th>
-													<td><input class="form-control form-control-sm"
-														type="text"></td>
-													<td><input class="form-control form-control-sm"
-														type="text"></td>
+													<td><input type="search"
+														name="sidService" id="sidService"
+														class="form-control form-control-sm" 
+														aria-controls="dataTable"></td>
+													<td><input type="search"
+														name="didService" id="didService"
+														class="form-control form-control-sm" 
+														aria-controls="dataTable"></td>
 
 												</tr>
 												<tr>
 													<th scope="row">GroupID</th>
-													<td><input class="form-control form-control-sm"
-														type="text"></td>
-													<td><input class="form-control form-control-sm"
-														type="text"></td>
+													<td><input type="search"
+														name="sidGroup" id="sidGroup"
+														class="form-control form-control-sm" 
+														aria-controls="dataTable"></td>
+													<td><input type="search"
+														name="didGroup" id="didGroup"
+														class="form-control form-control-sm" 
+														aria-controls="dataTable"></td>
 
 												</tr>
 												<tr>
 													<th scope="row">SystemID</th>
-													<td><input class="form-control form-control-sm"
-														type="text"></td>
-													<td><input class="form-control form-control-sm"
-														type="text"></td>
+													<td><input type="search"
+														name="sidSystem" id="sidSystem"
+														class="form-control form-control-sm" 
+														aria-controls="dataTable"></td>
+													<td><input type="search"
+														name="didSystem" id="didSystem"
+														class="form-control form-control-sm" 
+														aria-controls="dataTable"></td>
 												</tr>
 											</tbody>
 										</table>
@@ -233,12 +263,19 @@
 									</div>
 									<div class="card-body">
 										<label>횟수 :<input type="search"
-											class="form-control form-control-sm" placeholder=""
-											aria-controls="dataTable">
-										</label><label>주기 :<input type="search"
-											class="form-control form-control-sm" placeholder=""
+											name="totalSeq" id="totalSeq"
+											class="form-control form-control-sm" placeholder="횟수"
+											onfocus="this.placeholder=''" onblur="this.placeholder='횟수'"
 											aria-controls="dataTable">
 										</label>
+										
+										<label>주기 :<input type="search"
+											name="cycle" id="cycle"
+											class="form-control form-control-sm" placeholder="주기"
+											onfocus="this.placeholder=''" onblur="this.placeholder='주기'"
+											aria-controls="dataTable">
+										</label>
+										
 									</div>
 								</div>
 
@@ -249,10 +286,16 @@
 									</div>
 									<div class="card-body">
 										<label>IP :<input type="search"
-											class="form-control form-control-sm" placeholder=""
+											name="ip" id="ip"
+											class="form-control form-control-sm" placeholder="IP"
+											onfocus="this.placeholder=''" onblur="this.placeholder='IP'"
 											aria-controls="dataTable">
-										</label><label>PORT :<input type="search"
-											class="form-control form-control-sm" placeholder=""
+										</label>
+										
+										<label>PORT :<input type="search"
+											name="port" id="port"
+											class="form-control form-control-sm" placeholder="PORT"
+											onfocus="this.placeholder=''" onblur="this.placeholder='PORT'"
 											aria-controls="dataTable">
 										</label>
 									</div>
@@ -283,7 +326,7 @@
 										<div class="form-group">
 
 											<textarea class="form-control"
-												id="exampleFormControlTextarea1" rows="10"></textarea>
+												name="payload" id="payload" rows="10"></textarea>
 										</div>
 
 
@@ -318,7 +361,7 @@
 										<div class="form-group">
 
 											<textarea class="form-control"
-												id="exampleFormControlTextarea1" rows="10"></textarea>
+												name="result" id="result" rows="10"></textarea>
 										</div>
 
 									</div>

@@ -10,50 +10,73 @@ import com.example.client.NettyClient;
 import com.example.domain.MainVO;
 import com.example.service.MainService;
 
-
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
 import lombok.extern.log4j.Log4j2;
 
 @Controller
 @Log4j2
 public class MainController {
-	
+
 	@Autowired
 	private MainService service;
-	
+
 	@RequestMapping("/main")
 	public String main(Model model) {
 //		log.info("Controller 실행");
-		
+
 		List<MainVO> testList = new ArrayList<>();
 		testList = service.getTestList();
-		
+
 		model.addAttribute("testList", testList);
 		return "test5";
 	}
-	
-	@RequestMapping("/index")
-	public String headerSize(@RequestParam("headerSize") String headerSize, Model model) {
-		
-		System.out.println("@RequestParam : "+ headerSize);
-		model.addAttribute("headerSize", headerSize);
-		
-		NettyClient nc = new NettyClient();
-		try {
-            nc.connect(8085, "192.168.34.6");
-            
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-		return "index";
-	}
-//	@RequestMapping("/index") 
-//	public String response(Model model){
-//		model.addAttribute("value1", strTemp);  
+
+//	@RequestMapping("/index")
+//	public String headerSize(@RequestParam("headerSize") String headerSize, Model model) {
+//		
+//		System.out.println("@RequestParam : "+ headerSize);
+//		model.addAttribute("headerSize", headerSize);
+//		/*
+//		NettyClient nc = new NettyClient();
+//		try {
+//            nc.connect(8085, "192.168.34.6");
+//            
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }*/
 //		return "index";
 //	}
 
-	
-	
+	@RequestMapping("/index")
+	public String headerSize(@RequestParam HashMap<String, Object> map, Model model) {
+
+//		System.out.println("@RequestParam : "+ headerSize);
+//		model.addAttribute("headerSize", headerSize);
+
+		model.addAllAttributes(map);
+
+		System.out.println("----------------------------");
+		for (String key : map.keySet()) {
+			String value = (String) map.get(key);
+			System.out.println(key + " = " + value);
+		}
+		System.out.println("----------------------------");
+
+		NettyClient nc = new NettyClient();
+		try {
+			nc.connect(8085, "192.168.34.6");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return "index";
+	}
+
 }
