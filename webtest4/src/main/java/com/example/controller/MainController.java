@@ -9,6 +9,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.client.NettyClient;
 import com.example.domain.MainVO;
 import com.example.service.MainService;
+import com.example.test.TimsClientTest;
+import com.example.timsclient.TimsClient;
+
+import kr.tracom.platform.net.config.TimsConfig;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,6 +29,7 @@ public class MainController {
 
 	@Autowired
 	private MainService service;
+	
 
 	@RequestMapping("/main")
 	public String main(Model model) {
@@ -67,14 +72,28 @@ public class MainController {
 			System.out.println(key + " = " + value);
 		}
 		System.out.println("----------------------------");
-
-		NettyClient nc = new NettyClient();
-		try {
-			nc.connect(8085, "192.168.34.6");
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		
+		//TimsClientTest(TimsTCP, TimsNet, TimsAttribute 참조 걸어둠)
+		TimsConfig timsConfig = new TimsConfig();
+		TimsClientTest tct = new TimsClientTest("192.168.34.233", 8083, timsConfig);
+		tct.run();
+		
+		
+		//TimsClient
+//		TimsConfig timsConfig = new TimsConfig();
+//		TimsClient tc = new TimsClient("192.168.34.6", 8083, timsConfig);
+//		tc.run();
+		
+		
+		//NettyClient
+//		NettyClient nc = new NettyClient();
+//		try {
+//			nc.connect(8083, "192.168.34.6");
+//
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
+		
 
 		return "index";
 	}
