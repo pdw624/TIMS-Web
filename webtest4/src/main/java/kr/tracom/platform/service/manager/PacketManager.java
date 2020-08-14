@@ -19,7 +19,8 @@ public class PacketManager {
     public static void requestAuth(Channel ch, TimsConfig timsConfig) {
         TimsMessageBuilder builder = new TimsMessageBuilder(timsConfig);
         TimsMessage timsSendMessage = builder.initRequest(AtCode.DEVICE_AUTH);
-        TransactionManager.write(new TcpChannelMessage(ch, null, timsSendMessage));
+        TransactionManager.write
+        (new TcpChannelMessage(ch, null, timsSendMessage));
     }
 
     public static void initPacket(Channel ch, TcpSession tcpSession, TimsConfig timsConfig) {

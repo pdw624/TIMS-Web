@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.client.NettyClient;
 import com.example.domain.MainVO;
 import com.example.service.MainService;
+import com.example.test.TimsClientHandlerTest;
 import com.example.test.TimsClientTest;
 import com.example.timsclient.TimsClient;
 
@@ -75,7 +76,7 @@ public class MainController {
 		
 		//TimsClientTest(TimsTCP, TimsNet, TimsAttribute 참조 걸어둠)
 		TimsConfig timsConfig = new TimsConfig();
-		TimsClientTest tct = new TimsClientTest("192.168.34.233", 8083, timsConfig);
+		TimsClientTest tct = new TimsClientTest("192.168.34.6", 8083, timsConfig);
 		tct.run();
 		
 		

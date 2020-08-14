@@ -16,7 +16,7 @@ import java.util.Map;
 public class AtDeviceAuth extends AtData {
 	public static final int SIZE = 14;
 	
-	private String deviceId;
+	private String deviceId="IMP0010021";
 	private byte[] accessKey;
 	
 	public AtDeviceAuth() {

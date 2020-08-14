@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="ko">
   <head>
     <meta charset="utf-8">
@@ -19,7 +20,23 @@
   </head>
   <body>
     <h1>Hello, world!</h1>
-
+		HeaderSize : <span th:text="${headerSize}"></span><br>
+		protocolVersion = <span th:text="${protocolVersion}"></span><br>
+		packetID = <span th:text="${packetID}"></span><br>
+		apduLength = <span th:text="${apduLength}"></span><br>
+		sidService = <span th:text="${sidService}"></span><br>
+		didService = <span th:text="${didService}"></span><br>
+		sidGroup = <span th:text="${sidGroup}"></span><br>
+		didGroup = <span th:text="${didGroup}"></span><br>
+		sidSystem = <span th:text="${sidSystem}"></span><br>
+		didSystem = <span th:text="${didSystem}"></span><br>
+		totalSeq = <span th:text="${totalSeq}"></span><br>
+		cycle = <span th:text="${cycle}"></span><br>
+		ip = <span th:text="${ip}"></span><br>
+		port = <span th:text="${port}"></span><br>
+		payload = <span th:text="${payload}"></span><br>
+		result = <span th:text="${result}"></span><br>
+		
     <!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <!-- 모든 컴파일된 플러그인을 포함합니다 (아래), 원하지 않는다면 필요한 각각의 파일을 포함하세요 -->
