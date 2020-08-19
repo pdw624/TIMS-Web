@@ -49,4 +49,30 @@ public class TimsConfig {
         this.remoteFlowControl = 0;
         this.localFlowControl = 0;
     }
+    
+    
+    public TimsConfig(byte protocolIndicator, byte protocolVersion, byte lf, byte rf, byte ce, byte tr, byte to, byte rc) {
+        this.channelName = "BIS-CHANNEL";
+        this.channelPort = 8083;
+        this.headerType = "A";
+        this.endianType = "little";
+        this.strEncoding = "EUC-KR";
+
+        this.indicator = protocolIndicator;
+        this.maxPacketSize = 65536;
+        this.maxPacketCount = 256;
+        this.version = protocolVersion;
+        this.apduOffset = 6;
+        this.readTimeout = 120;
+
+        this.retryCount = rc;
+        this.responseTimeOut = to;
+        this.crcEnable = ce;
+        this.transferRoute = tr;
+        this.remoteFlowControl = rf;
+        this.localFlowControl = lf;
+    }
+    
+    
+    
 }

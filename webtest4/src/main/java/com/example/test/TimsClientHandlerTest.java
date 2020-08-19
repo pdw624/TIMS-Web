@@ -17,6 +17,7 @@ import kr.tracom.platform.attribute.common.AtDeviceAuth;
 import kr.tracom.platform.net.config.TimsConfig;
 import kr.tracom.platform.net.protocol.TimsMessage;
 import kr.tracom.platform.net.protocol.TimsMessageBuilder;
+import kr.tracom.platform.net.protocol.payload.PlCode;
 import kr.tracom.platform.service.manager.TransactionManager;
 import kr.tracom.platform.tcp.model.TcpChannelMessage;
 
@@ -25,17 +26,8 @@ public class TimsClientHandlerTest extends SimpleChannelInboundHandler<TimsMessa
 	private TimsClientTest timsClient;	
 	private final Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 	
-	public static TimsMessage timsMSG;
 	
-    public static void responseAuth(Channel ch, TimsConfig timsConfig) {
-    	AtDeviceAuth deviceAuth = new AtDeviceAuth();
-    	
-        TimsMessageBuilder builder = new TimsMessageBuilder(timsConfig);
-        TimsMessage timsSendMessage = builder.initResponse(AtCode.DEVICE_AUTH, deviceAuth);
-        timsMSG = timsSendMessage;
-        TransactionManager.write(new TcpChannelMessage(ch, null, timsSendMessage));
-    }
-    
+	
 	public TimsClientHandlerTest(TimsClientTest timsClient) {
 		this.timsClient = timsClient;
 	}
@@ -57,11 +49,29 @@ public class TimsClientHandlerTest extends SimpleChannelInboundHandler<TimsMessa
 	protected void channelRead0(ChannelHandlerContext ctx, TimsMessage timsMessage) throws Exception {
 		//this.channelRead0((ChannelHandlerContext) ctx.channel(), timsMessage);
 		logger.info("채널읽기");
-		logger.info("받은페이로드:{}",timsMessage.getPayload());
-		responseAuth(ctx.channel(), timsClient.getTimsConfig());
-		logger.info("보낸페이로드:{}",timsMSG.getPayload());
-		logger.info("보낸헤더사이즈:{}",timsMSG.getHeader().getHeaderSize());
+		logger.info("받은페이로드(init):{}",timsMessage.getPayload());
+		
+		if(timsMessage.getHeader().getOpCode()==PlCode.OP_INIT_REQ) {
+			logger.info("Init Request Received!!!");
+			ClientMsgHandler.responseAuth(ctx.channel(), timsClient.getTimsConfig());
+		}
+		
+		
+		ClientMsgHandler.requestGet(ctx.channel(), timsClient.getTimsConfig());
+		if(timsMessage.getHeader().getOpCode()==PlCode.OP_GET_RES) {
+			logger.info("Get Response Received!!!");
+		}
+		
+		
+		logger.info("Get Request 보냄!!!");
+		
+		
+		//decoding(timsMessage);
 	}
+	
+//	protected void decoding(TimsMessage timsMessage) {
+//		timsMessage.
+//	}
 	
 	@Override
 	public void channelReadComplete(ChannelHandlerContext ctx) throws Exception {

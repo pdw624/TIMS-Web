@@ -33,9 +33,26 @@ public class MainController {
 	
 
 	@RequestMapping("/main")
-	public String main(Model model) {
+	public String main(Model model, @RequestParam HashMap<String, Object> map, Model hbtModel) {
 //		log.info("Controller 실행");
 
+		hbtModel.addAllAttributes(map);
+
+		System.out.println("----------------------------");
+		for (String key : map.keySet()) {
+			String value = (String) map.get(key);
+			System.out.println(key + " = " + value);
+		}
+		System.out.println("----------------------------");
+		
+		//TimsClientTest(TimsTCP, TimsNet, TimsAttribute 참조 걸어둠)
+		TimsConfig timsConfig = new TimsConfig();
+		TimsClientTest tct = new TimsClientTest("192.168.34.6", 8083, timsConfig);
+		tct.run();
+		
+		
+		
+		////////////////////////////////////////////
 		List<MainVO> testList = new ArrayList<>();
 		testList = service.getTestList();
 
@@ -59,44 +76,44 @@ public class MainController {
 //		return "index";
 //	}
 
-	@RequestMapping("/index")
-	public String headerSize(@RequestParam HashMap<String, Object> map, Model model) {
-
-//		System.out.println("@RequestParam : "+ headerSize);
-//		model.addAttribute("headerSize", headerSize);
-
-		model.addAllAttributes(map);
-
-		System.out.println("----------------------------");
-		for (String key : map.keySet()) {
-			String value = (String) map.get(key);
-			System.out.println(key + " = " + value);
-		}
-		System.out.println("----------------------------");
-		
-		//TimsClientTest(TimsTCP, TimsNet, TimsAttribute 참조 걸어둠)
-		TimsConfig timsConfig = new TimsConfig();
-		TimsClientTest tct = new TimsClientTest("192.168.34.6", 8083, timsConfig);
-		tct.run();
-		
-		
-		//TimsClient
-//		TimsConfig timsConfig = new TimsConfig();
-//		TimsClient tc = new TimsClient("192.168.34.6", 8083, timsConfig);
-//		tc.run();
-		
-		
-		//NettyClient
-//		NettyClient nc = new NettyClient();
-//		try {
-//			nc.connect(8083, "192.168.34.6");
+//	@RequestMapping("/index")
+//	public String headerSize(@RequestParam HashMap<String, Object> map, Model model) {
 //
-//		} catch (Exception e) {
-//			e.printStackTrace();
+////		System.out.println("@RequestParam : "+ headerSize);
+////		model.addAttribute("headerSize", headerSize);
+//
+//		model.addAllAttributes(map);
+//
+//		System.out.println("----------------------------");
+//		for (String key : map.keySet()) {
+//			String value = (String) map.get(key);
+//			System.out.println(key + " = " + value);
 //		}
-		
-
-		return "index";
-	}
+//		System.out.println("----------------------------");
+//		
+//		//TimsClientTest(TimsTCP, TimsNet, TimsAttribute 참조 걸어둠)
+//		TimsConfig timsConfig = new TimsConfig();
+//		TimsClientTest tct = new TimsClientTest("192.168.34.6", 8083, timsConfig);
+//		tct.run();
+//		
+//		
+//		//TimsClient
+////		TimsConfig timsConfig = new TimsConfig();
+////		TimsClient tc = new TimsClient("192.168.34.6", 8083, timsConfig);
+////		tc.run();
+//		
+//		
+//		//NettyClient
+////		NettyClient nc = new NettyClient();
+////		try {
+////			nc.connect(8083, "192.168.34.6");
+////
+////		} catch (Exception e) {
+////			e.printStackTrace();
+////		}
+//		
+//
+//		return "index";
+//	}
 
 }
