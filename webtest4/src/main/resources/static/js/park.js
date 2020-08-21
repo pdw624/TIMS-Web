@@ -6,7 +6,7 @@ var po_val;
 
 var opCode = document.getElementById("opCode");
 var op_val;
-
+var temp;
 /*
 for(i=0; i<protocolOption.options.length; i++) {
     if(protocolOption.options[i].selected == true) {
@@ -61,11 +61,11 @@ function goChange(val){
 
 
 function button_click(){
-	pi_val = protocolIndicator.options[protocolIndicator.selectedIndex].value;
+	//pi_val = protocolIndicator.options[protocolIndicator.selectedIndex].value;
 	//console.log(button_click.pi_val);
-	po_val = protocolOption.options[protocolOption.selectedIndex].value;
-	op_val = opCode.options[opCode.selectedIndex].value;
-	alert("전송하였습니다");
+	document.getElementById("isSend").value="true";
+	temp = document.getElementById("isSend").value;
+	alert("hello " + temp);
 }
 
 //console.log(button_click.pi_val);

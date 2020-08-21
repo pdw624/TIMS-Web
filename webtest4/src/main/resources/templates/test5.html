@@ -79,6 +79,43 @@
 
 							</tbody>
 						</table>
+						
+						
+						
+						<table class="table table-bordered" id="dataTable" width="100%"
+							cellspacing="0">
+							<thead>
+								<tr>
+									<th>Name</th>
+									<th>Position</th>
+									<th>Office</th>
+									<th>Age</th>
+
+								</tr>
+							</thead>
+							<tfoot>
+								<tr>
+									<th>Name</th>
+									<th>Position</th>
+									<th>Office</th>
+									<th>Age</th>
+
+								</tr>
+							</tfoot>
+							<tbody>
+								<tr th:each="item, stat : ${testList}">
+									<td scope="row" th:text="${stat.count}"></td>
+									<td th:text="${item.id}"></td>
+									<td th:text="${item.name}"></td>
+									<td th:text="${item.age}"></td>
+								</tr>
+
+							</tbody>
+						</table>
+			
+						
+						
+						
 					</div>
 				</div>
 			</div>
@@ -111,9 +148,82 @@
 				<div class="container-fluid">
 
 					<!-- Page Heading -->
-					<h1 class="h3 mb-1 text-gray-800">중간내용</h1>
+					
+					<!-- <form action="main" method="post">
+					<div style="float:right;">
+					
+							<label>IP :<input type="search" name="ip" id="ip" value="192.168.34.6"
+											class="form-control form-control-sm" 
+											aria-controls="dataTable">
+							</label>
+							<label>PORT :<input type="search" name="port" value="8083"
+											id="port" class="form-control form-control-sm"
+											aria-controls="dataTable">
+							</label>
+						<button type="submit" class="btn btn-outline-primary" onClick="button_click()">연결</button>
+						<button type="button" class="btn btn-outline-secondary">저장</button>
+					</div> 
+					</form>
+					 -->
+				
+
+
+					<!-- <div class="card position-relative">
+						<div class="card-header py-3">
+							<h6 class="m-0 font-weight-bold text-primary">Send Info</h6>
+						</div>
+						<div class="card-body">
+							<label>IP :<input type="search" name="ip" id="ip"
+								value="192.168.34.6" class="form-control form-control-sm"
+								aria-controls="dataTable">
+							</label> <label>PORT :<input type="search" name="port"
+								value="8083" id="port" class="form-control form-control-sm"
+								aria-controls="dataTable">
+							</label>
+
+						</div>
+					</div>
+
+ -->
+
+
+
 
 					<form action="main" method="post">
+					
+					
+					
+					
+					<div class="col-lg-7">
+					
+						<div class="input-group">
+							<div class="input-group-prepend">
+    							<span class="input-group-text" id="basic-addon1">IP</span>
+  							</div>
+  							<input type="search" name="ip" id="ip"
+								value="192.168.34.6" class="form-control"
+								aria-controls="dataTable">
+  							
+  							
+  							<div class="input-group-prepend">
+    							<span class="input-group-text" id="basic-addon1">PORT</span>
+  							</div>
+  							<input type="search" name="port"
+								value="8083" id="port" class="form-control"
+								aria-controls="dataTable">
+  							
+  							
+  							<div class="input-group-append" id="button-addon4">
+    							<button type="submit" class="btn btn-outline-primary" onClick="button_click()">연결</button>
+    							<button class="btn btn-outline-secondary" type="button">연결해제</button>
+  							</div>
+						</div>
+						<br>
+					
+				</div>
+					
+					
+					
 						<!-- Content Row -->
 						<div class="row">
 
@@ -164,17 +274,17 @@
 
 
 										<label>Header Size: <input type="search"
-											name="headerSize" id="headerSize"
+											name="headerSize" id="headerSize" value="20"
 											class="form-control form-control-sm" placeholder="헤더사이즈"
 											onfocus="this.placeholder=''"
 											onblur="this.placeholder='헤더사이즈'" aria-controls="dataTable">
-										</label> <label>Protocol Version:<input type="search"
-											name="protocolVersion" id="protocolVersion"
-											class="form-control form-control-sm" placeholder="프로토콜버전"
-											onfocus="this.placeholder=''"
-											onblur="this.placeholder='프로토콜버전'" aria-controls="dataTable">
-										</label> <label>Packet ID:<input type="search" name="packetID"
-											id="packetID" class="form-control form-control-sm"
+										</label> <label>Protocol Version:<input type="search" 
+											name="protocolVersion" id="protocolVersion" value="1"
+											class="form-control form-control-sm"  placeholder="프로토콜버전" 
+											onfocus="this.placeholder=''" onblur="this.placeholder='프로토콜버전'" 
+											aria-controls="dataTable">
+										</label> <label>Packet ID:<input type="search" name="packetID" id="packetID"  value="0" 
+											class="form-control form-control-sm"
 											placeholder="패킷ID" onfocus="this.placeholder=''"
 											onblur="this.placeholder='패킷ID'" aria-controls="dataTable">
 										</label> <div class="form-group">
@@ -207,7 +317,7 @@
 													<td><select class="form-control" name="CE"
 													id="CE">
 														<option>0</option>
-														<option>1</option>
+														<option selected>1</option>
 													</select></td>
 
 												</tr>
@@ -228,14 +338,14 @@
 														<option>0</option>
 														<option>1</option>
 														<option>2</option>
-														<option>3</option>
+														<option selected>3</option>
 													</select></td>
 													<td><select class="form-control" name="RC"
 													id="RC">
 														<option>0</option>
 														<option>1</option>
 														<option>2</option>
-														<option>3</option>
+														<option selected>3</option>
 													</select></td>
 												</tr>
 											</tbody>
@@ -255,12 +365,6 @@
 												</select>
 											</div> 
 											
-											<label>APDU Length:<input type="search"
-											name="apduLength" id="apduLength"
-											class="form-control form-control-sm" placeholder="페이로드길이"
-											onfocus="this.placeholder=''"
-											onblur="this.placeholder='페이로드길이'" aria-controls="dataTable">
-										</label>
 
 										<table class="table table-bordered">
 											<thead>
@@ -329,24 +433,23 @@
 									</div>
 								</div>
 
-
+<!-- 
 								<div class="card position-relative">
 									<div class="card-header py-3">
 										<h6 class="m-0 font-weight-bold text-primary">Send Info</h6>
 									</div>
 									<div class="card-body">
-										<label>IP :<input type="search" name="ip" id="ip"
-											class="form-control form-control-sm" placeholder="IP"
-											onfocus="this.placeholder=''" onblur="this.placeholder='IP'"
+										<label>IP :<input type="search" name="ip" id="ip" value="192.168.34.6"
+											class="form-control form-control-sm" 
 											aria-controls="dataTable">
-										</label> <label>PORT :<input type="search" name="port"
+										</label> <label>PORT :<input type="search" name="port" value="8083"
 											id="port" class="form-control form-control-sm"
-											placeholder="PORT" onfocus="this.placeholder=''"
-											onblur="this.placeholder='PORT'" aria-controls="dataTable">
+											aria-controls="dataTable">
 										</label>
+										
 									</div>
 								</div>
-
+ -->
 
 							</div>
 
@@ -380,12 +483,7 @@
 										<h6 class="m-0 font-weight-bold text-primary">GetReq</h6>
 									</div>
 									<div class="card-body">
-										<label>Attribute Count :<input type="search" name="atCountGReq" id="atCountGReq"
-											class="form-control form-control-sm" placeholder="AttributeCount"
-											onfocus="this.placeholder=''" onblur="this.placeholder='AttributeCount'"
-											aria-controls="dataTable">
-										</label><br>
-										<label>Attribute ID :<input type="search" name="atIdGReq" id="atIdGReq"
+										<label>Attribute ID :<input type="search" name="atIdGreq" id="atIdGreq"
 											class="form-control form-control-sm" placeholder="AttributeID"
 											onfocus="this.placeholder=''" onblur="this.placeholder='AttributeID'"
 											aria-controls="dataTable">
@@ -399,11 +497,6 @@
 										<h6 class="m-0 font-weight-bold text-primary">SetReq</h6>
 									</div>
 									<div class="card-body">
-										<label>Attribute Count :<input type="search" name="atCountSReq" id="atCountSReq"
-											class="form-control form-control-sm" placeholder="AttributeCount"
-											onfocus="this.placeholder=''" onblur="this.placeholder='AttributeCount'"
-											aria-controls="dataTable">
-										</label><br>
 										<label>Attribute ID :<input type="search" name="atIdSreq" id="atIdSreq"
 											class="form-control form-control-sm" placeholder="AttributeID"
 											onfocus="this.placeholder=''" onblur="this.placeholder='AttributeID'"
@@ -430,7 +523,7 @@
 									</div>
 									<div class="card-body">
 										
-										<label>Attribute ID :<input type="search" name="atIdAReq" id="atIdAReq"
+										<label>Attribute ID :<input type="search" name="atIdAreq" id="atIdAreq"
 											class="form-control form-control-sm" placeholder="AttributeID"
 											onfocus="this.placeholder=''" onblur="this.placeholder='AttributeID'"
 											aria-controls="dataTable">
@@ -455,12 +548,12 @@
 									</div>
 									<div class="card-body">
 										
-										<label>Attribute ID :<input type="search" name="atIdARes" id="atIdARes"
+										<label>Attribute ID :<input type="search" name="atIdAres" id="atIdAres"
 											class="form-control form-control-sm" placeholder="AttributeID"
 											onfocus="this.placeholder=''" onblur="this.placeholder='AttributeID'"
 											aria-controls="dataTable">
 										</label><br>
-										<label>Result :<input type="search" name="resultARes" id="resultARes"
+										<label>Result :<input type="search" name="resultAres" id="resultAres"
 											class="form-control form-control-sm" placeholder="result"
 											onfocus="this.placeholder=''" onblur="this.placeholder='result'"
 											aria-controls="dataTable">
@@ -485,18 +578,12 @@
 										<h6 class="m-0 font-weight-bold text-primary">EventReq</h6>
 									</div>
 									<div class="card-body">
-										
-										<label>Attribute Count :<input type="search" name="atCountEReq" id="atCountEReq"
-											class="form-control form-control-sm" placeholder="AttributeCount"
-											onfocus="this.placeholder=''" onblur="this.placeholder='AttributeCount'"
-											aria-controls="dataTable">
-										</label><br>
-										<label>Attribute ID :<input type="search" name="atIdEReq" id="atIdEReq"
+										<label>Attribute ID :<input type="search" name="atIdEreq" id="atIdEreq"
 											class="form-control form-control-sm" placeholder="AttributeID"
 											onfocus="this.placeholder=''" onblur="this.placeholder='AttributeID'"
 											aria-controls="dataTable">
 										</label><br>
-										<label>Attribute Size :<input type="search" name="atSizeEReq" id="atSizeEReq"
+										<label>Attribute Size :<input type="search" name="atSizeEreq" id="atSizeEreq"
 											class="form-control form-control-sm" placeholder="AttributeSize"
 											onfocus="this.placeholder=''" onblur="this.placeholder='AttributeSize'"
 											aria-controls="dataTable">
@@ -546,10 +633,12 @@
 
 								</div>
 
-								<br></br>
-
-								<button type="submit" class="btn btn-outline-primary" onclick= "button_click();">전송</button>
-								<button type="button" class="btn btn-outline-secondary" onclick= "button_click();">저장</button>
+								
+								<input type="hidden" name="isSend" id="isSend" value="false"
+										class="form-control form-control-sm" 
+										aria-controls="dataTable">
+								<button type="submit" class="btn btn-outline-primary" onClick="button_click()">전송</button>
+								<button type="button" class="btn btn-outline-secondary">저장</button>
 
 							</div>
 						</div>

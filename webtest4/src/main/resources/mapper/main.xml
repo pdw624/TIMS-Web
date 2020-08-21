@@ -4,8 +4,16 @@
 
 <mapper namespace="com.example.mapper.MainMapper">
 
+
 	<select id="getTestList" resultType="com.example.domain.MainVO">
 		SELECT *
 		FROM table1
 	</select>
+ 	
+<!--
+   <select id="getHBTList" resultType="com.example.domain.HBTVO">
+		SELECT *
+		FROM MSG_FORM
+	</select>
+-->
 </mapper>

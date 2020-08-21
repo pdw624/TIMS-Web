@@ -7,8 +7,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.client.NettyClient;
+import com.example.domain.HbtVO;
 import com.example.domain.MainVO;
 import com.example.service.MainService;
+import com.example.test.ClientMsgHandler;
 import com.example.test.TimsClientHandlerTest;
 import com.example.test.TimsClientTest;
 import com.example.timsclient.TimsClient;
@@ -27,15 +29,18 @@ import lombok.extern.log4j.Log4j2;
 @Controller
 @Log4j2
 public class MainController {
-
+	
+	public static boolean isConnected = false;
+	public static TimsClientTest tct;
 	@Autowired
 	private MainService service;
+	public static HashMap<String,Object> usableMap;
 	
-
 	@RequestMapping("/main")
 	public String main(Model model, @RequestParam HashMap<String, Object> map, Model hbtModel) {
 //		log.info("Controller 실행");
-
+		usableMap = new HashMap<String, Object>(map);
+		
 		hbtModel.addAllAttributes(map);
 
 		System.out.println("----------------------------");
@@ -45,10 +50,22 @@ public class MainController {
 		}
 		System.out.println("----------------------------");
 		
-		//TimsClientTest(TimsTCP, TimsNet, TimsAttribute 참조 걸어둠)
-		TimsConfig timsConfig = new TimsConfig();
-		TimsClientTest tct = new TimsClientTest("192.168.34.6", 8083, timsConfig);
-		tct.run();
+		
+//		usableMap = new HashMap<String, Object>(map);
+//		System.out.println((String)MainController.usableMap.get("atIdGReq"));
+//		String tempStr=(String) MainController.usableMap.get("atIdGReq");
+		//int tempInt = Integer.parseInt(tempStr);
+		//System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!"+tempInt);
+		
+		//System.out.println(map.get("atIdGreq"));
+		
+		//처음 시작할 때 값이 있다면
+
+		connection(usableMap);
+		
+		if(map.isEmpty()==false && isConnected==true) {
+			ClientMsgHandler.msgSelect((String) map.get("opCode"));
+		}
 		
 		
 		
@@ -57,63 +74,57 @@ public class MainController {
 		testList = service.getTestList();
 
 		model.addAttribute("testList", testList);
+		
+		
+		////////////////////////////////////////////
+//		List<HbtVO> hbtList = new ArrayList<>();
+//		hbtList = service.getHBTList();
+//		
+//		model.addAttribute("hbtList", hbtList);
+		
 		return "test5";
 	}
+	
+	public static byte toByte(HashMap<String, Object> map, String str) {
+		String strTemp = (String)map.get(str);
+		byte result =(byte) strTemp.charAt(0);
+		
+		//String형의 숫자로 받았을땐 >> 정수로 변환해준다 ASCII
+		if(result>=48 && result<=57) {
+			result = (byte) (result-48);
+		}
+		System.out.println(str+" "+result);
+		//String result=/*"0x"+*/Integer.toHexString(+intTemp);
+		
+		return result;
+	}
+	
+	public void connection(HashMap<String, Object> map) {
+		// 처음 시작할 때 값이 있다면
+		if (map.isEmpty() == false) {
 
-//	@RequestMapping("/index")
-//	public String headerSize(@RequestParam("headerSize") String headerSize, Model model) {
-//		
-//		System.out.println("@RequestParam : "+ headerSize);
-//		model.addAttribute("headerSize", headerSize);
-//		/*
-//		NettyClient nc = new NettyClient();
-//		try {
-//            nc.connect(8085, "192.168.34.6");
-//            
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }*/
-//		return "index";
-//	}
-
-//	@RequestMapping("/index")
-//	public String headerSize(@RequestParam HashMap<String, Object> map, Model model) {
-//
-////		System.out.println("@RequestParam : "+ headerSize);
-////		model.addAttribute("headerSize", headerSize);
-//
-//		model.addAllAttributes(map);
-//
-//		System.out.println("----------------------------");
-//		for (String key : map.keySet()) {
-//			String value = (String) map.get(key);
-//			System.out.println(key + " = " + value);
-//		}
-//		System.out.println("----------------------------");
-//		
-//		//TimsClientTest(TimsTCP, TimsNet, TimsAttribute 참조 걸어둠)
-//		TimsConfig timsConfig = new TimsConfig();
-//		TimsClientTest tct = new TimsClientTest("192.168.34.6", 8083, timsConfig);
-//		tct.run();
-//		
-//		
-//		//TimsClient
-////		TimsConfig timsConfig = new TimsConfig();
-////		TimsClient tc = new TimsClient("192.168.34.6", 8083, timsConfig);
-////		tc.run();
-//		
-//		
-//		//NettyClient
-////		NettyClient nc = new NettyClient();
-////		try {
-////			nc.connect(8083, "192.168.34.6");
-////
-////		} catch (Exception e) {
-////			e.printStackTrace();
-////		}
-//		
-//
-//		return "index";
-//	}
+			if (isConnected == false) {
+				// 연결
+				boolean isSend = Boolean.parseBoolean((String) map.get("isSend"));
+				String ip = (String) map.get("ip");
+				int port = Integer.parseInt((String) map.get("port"));
+				// 전송받으면
+				if (isSend == true) {
+					// TimsClientTest(TimsTCP, TimsNet, TimsAttribute 참조 걸어둠)
+					TimsConfig timsConfig = new TimsConfig(toByte(map, "protocolIndicator"),
+															toByte(map, "protocolVersion"), 
+															toByte(map, "LF"), 
+															toByte(map, "RF"), 
+															toByte(map, "CE"),
+															toByte(map, "TR"), 
+															toByte(map, "TO"), 
+															toByte(map, "RC"));
+					tct = new TimsClientTest(ip, port, timsConfig);
+					tct.run();
+				}
+				//isConnected = true;
+			}
+		}
+	}
 
 }

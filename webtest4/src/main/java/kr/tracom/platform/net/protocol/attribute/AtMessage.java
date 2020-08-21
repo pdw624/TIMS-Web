@@ -1,5 +1,7 @@
 package kr.tracom.platform.net.protocol.attribute;
 
+import java.util.Map;
+
 import kr.tracom.platform.net.config.TimsCode;
 import kr.tracom.platform.net.protocol.TimsObject;
 import kr.tracom.platform.net.protocol.factory.TimsAttributeFactory;
@@ -64,4 +66,6 @@ public class AtMessage implements TimsObject {
 		}
 		return log;
 	}
+
+
 }
