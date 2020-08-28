@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.example.mapper.HBTMapper">
+
+
+	<select id="getHBTList" resultType="com.example.domain.HbtVO">
+		SELECT *
+		FROM MSG_FORM
+	</select>
+
+
+
+ 	<insert id="insertData" parameterType="hashMap" useGeneratedKeys="true" keyProperty="TEST_CODE">
+		INSERT INTO MSG_FORM(PROTOCOL_INDICATOR, HEADERSIZE, PROTOCOL_VERSION, PACKET_ID, LF, RF, CE, TR, TO_A, RC, OP_CODE, 
+				GREQ_AT_ID, 
+				SREQ_AT_ID, SREQ_AT_SIZE, SREQ_AT_DATA, 
+				AREQ_AT_ID, AREQ_AT_SIZE, AREQ_AT_PARAM, 
+				ARES_AT_ID, ARES_AT_RESULT, ARES_AT_SIZE, ARES_AT_PARAM,
+				EREQ_AT_ID, EREQ_AT_SIZE, EREQ_AT_DATA, TOTAL_SEQ, CYCLE, IP, PORT)
+		VALUES(#{protocolIndicator}, #{headerSize}, #{protocolVersion}, #{packetID}, #{LF}, #{RF}, #{CE}, #{TR}, #{TO_A},  #{RC}, #{opCode},
+				 #{gReq_atId, jdbcType=VARCHAR},  
+				 #{sReq_atId, jdbcType=VARCHAR}, #{sReq_atSize, jdbcType=VARCHAR}, #{sReq_atData, jdbcType=VARCHAR},
+				 #{aReq_atId, jdbcType=VARCHAR}, #{aReq_atSize, jdbcType=VARCHAR}, #{aReq_atParam, jdbcType=VARCHAR},
+				 #{aRes_atId, jdbcType=VARCHAR}, #{aRes_atResult, jdbcType=VARCHAR}, #{aRes_atSize, jdbcType=VARCHAR}, #{aRes_atParam, jdbcType=VARCHAR},
+				 #{eReq_atId, jdbcType=VARCHAR}, #{eReq_atSize, jdbcType=VARCHAR}, #{eReq_atData, jdbcType=VARCHAR}, 
+				 #{totalSeq, jdbcType=INTEGER}, #{cycle, jdbcType=DOUBLE}, #{ip, jdbcType=VARCHAR}, #{port, jdbcType=INTEGER})
+	</insert>
+
+	<update id="updateData" parameterType="hashMap">
+		
+	</update>
+<!--                                        
+ 	<insert id="insertData" parameterType="hashMap" useGeneratedKeys="true" keyProperty="TEST_CODE">
+		INSERT INTO MSG_FORM(PROTOCOL_INDICATOR, HEADERSIZE, PROTOCOL_VERSION, PACKET_ID, LF, RF, CE, TR, TO, RC, OP_CODE, SID_SERVICE_ID, SID_GROUP_ID, SID_SYSTEM_ID, DID_SERVICE_ID, DID_GROUP_ID, DID_SYSTEM_ID, AT_ID, AT_SIZE, AT_DATA, AT_PARAM, AT_RESULT, TOTAL_SEQ, CYCLE)
+		VALUES(#{protocolIndicator}, #{headerSize}, #{protocolVersion}, #{packetID}, #{LF}, #{RF}, #{CE}, #{TR}, #{TO}, #{RC}, #{opCode}, #{sidService}, #{sidGroup}, #{sidSystem}, #{didService}, #{didGroup}, #{didSystem}, #{atId}, #{atSize}, #{atData}, #{atParam}, #{atResult}, #{totalSeq}, #{cycle})
+	</insert>
+-->	
+
+<!--
+   <select id="getHBTList" resultType="com.example.domain.HBTVO">
+		SELECT *
+		FROM MSG_FORM
+	</select>
+-->
+</mapper>

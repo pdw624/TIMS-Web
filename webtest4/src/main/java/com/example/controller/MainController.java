@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.client.NettyClient;
 import com.example.domain.HbtVO;
 import com.example.domain.MainVO;
+import com.example.service.HBTService;
 import com.example.service.MainService;
 import com.example.test.ClientMsgHandler;
 import com.example.test.TimsClientHandlerTest;
@@ -34,10 +35,14 @@ public class MainController {
 	public static TimsClientTest tct;
 	@Autowired
 	private MainService service;
+	@Autowired
+	private HBTService hbt_service;
+	
+	
 	public static HashMap<String,Object> usableMap;
 	
 	@RequestMapping("/main")
-	public String main(Model model, @RequestParam HashMap<String, Object> map, Model hbtModel) {
+	public String main(Model model, @RequestParam HashMap<String, Object> map, Model hbtModel) throws Exception {
 //		log.info("Controller 실행");
 		usableMap = new HashMap<String, Object>(map);
 		
@@ -63,27 +68,44 @@ public class MainController {
 
 		connection(usableMap);
 		
-		if(map.isEmpty()==false && isConnected==true) {
+		if(map.isEmpty()==false && isConnected==true &&  Boolean.parseBoolean((String) map.get("isSend"))==true) {
 			ClientMsgHandler.msgSelect((String) map.get("opCode"));
 		}
 		
 		
-		
+		//db조회값 화면 띄우기 테스트
 		////////////////////////////////////////////
 		List<MainVO> testList = new ArrayList<>();
 		testList = service.getTestList();
 
 		model.addAttribute("testList", testList);
 		
-		
+		//db조회값 화면 띄우기 테스트(실제 사용할 table)
 		////////////////////////////////////////////
-//		List<HbtVO> hbtList = new ArrayList<>();
-//		hbtList = service.getHBTList();
-//		
-//		model.addAttribute("hbtList", hbtList);
+		List<HbtVO> hbtList = new ArrayList<>();
+		hbtList = hbt_service.getHBTList();
+		
+		model.addAttribute("hbtList", hbtList);
+		
+		//data Insert (저장 버튼을 눌렀을 때 실행돼야함)
+		////////////////////////////////////////////
+		if(Boolean.parseBoolean((String) map.get("isSaved"))==true) {
+			int temp;
+			temp = hbt_service.insertData(map);
+			model.addAttribute("hbtList", temp);
+			
+			hbtList = new ArrayList<>();
+			hbtList = hbt_service.getHBTList();
+			model.addAttribute("hbtList", hbtList);
+		}
+		
 		
 		return "test5";
 	}
+	
+	
+	
+	
 	
 	public static byte toByte(HashMap<String, Object> map, String str) {
 		String strTemp = (String)map.get(str);
@@ -98,6 +120,9 @@ public class MainController {
 		
 		return result;
 	}
+	
+
+	
 	
 	public void connection(HashMap<String, Object> map) {
 		// 처음 시작할 때 값이 있다면
@@ -117,7 +142,7 @@ public class MainController {
 															toByte(map, "RF"), 
 															toByte(map, "CE"),
 															toByte(map, "TR"), 
-															toByte(map, "TO"), 
+															toByte(map, "TO_A"), 
 															toByte(map, "RC"));
 					tct = new TimsClientTest(ip, port, timsConfig);
 					tct.run();

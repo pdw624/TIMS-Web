@@ -44,13 +44,15 @@
 			<!-- DataTales Example -->
 			<div class="card shadow mb-4">
 				<div class="card-header py-3">
-					<h6 class="m-0 font-weight-bold text-primary">DataTables
-						Example</h6>
+					<h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
 				</div>
 				<div class="card-body">
 					<div class="table-responsive">
+					
+					
+					<!-- 
 						<table class="table table-bordered" id="dataTable" width="100%"
-							cellspacing="0">
+							cellspacing="0" >
 							<thead>
 								<tr>
 									<th>Name</th>
@@ -80,39 +82,129 @@
 							</tbody>
 						</table>
 						
+						 -->
 						
 						
-						<table class="table table-bordered" id="dataTable" width="100%"
+						<table class="table table-bordered table-hover" id="dataTable" width="100%"
 							cellspacing="0">
 							<thead>
 								<tr>
-									<th>Name</th>
-									<th>Position</th>
-									<th>Office</th>
-									<th>Age</th>
-
+									<th>No.</th>
+									<th>테스트코드</th>
+									<th>테스트명</th>
+									<th>#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>	
+									<th style="display: none">#</th>	
 								</tr>
 							</thead>
 							<tfoot>
 								<tr>
-									<th>Name</th>
-									<th>Position</th>
-									<th>Office</th>
-									<th>Age</th>
-
+									<th>No.</th>
+									<th>테스트코드</th>
+									<th>테스트명</th>
+									<th>#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>	
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>	
+									<th style="display: none">#</th>				
 								</tr>
 							</tfoot>
 							<tbody>
-								<tr th:each="item, stat : ${testList}">
-									<td scope="row" th:text="${stat.count}"></td>
-									<td th:text="${item.id}"></td>
-									<td th:text="${item.name}"></td>
-									<td th:text="${item.age}"></td>
+								<tr th:each="item, stat : ${hbtList}">
+									<!-- 0 --><td scope="row" th:text="${stat.count}"></td>
+									<!-- 1 --><td th:text="${item.TEST_CODE}"></td>
+									<!-- 2 --><td th:text="${item.TEST_NAME}"></td>
+									<!-- 3 --><td><input type="checkbox" name="user_CheckBox" ></td>	
+									<!-- 4 --><td th:text="${item.PROTOCOL_INDICATOR}" style="display: none"></td>
+									<!-- 5 --><td th:text="${item.HEADERSIZE}" style="display: none"></td>
+									<!-- 6 --><td th:text="${item.PROTOCOL_VERSION}" style="display: none"></td>
+									<!-- 7 --><td th:text="${item.PACKET_ID}" style="display: none"></td>
+									<!-- 8 --><td th:text="${item.LF}" style="display: none"></td>
+									<!-- 9 --><td th:text="${item.RF}" style="display: none"></td>
+									<!-- 10 --><td th:text="${item.CE}" style="display: none"></td>
+									<!-- 11 --><td th:text="${item.TR}" style="display: none"></td>
+									<!-- 12 --><td th:text="${item.TO_A}" style="display: none"></td>
+									<!-- 13 --><td th:text="${item.RC}" style="display: none"></td>
+									<!-- 14 --><td th:text="${item.OP_CODE}" style="display: none"></td>
+									<!-- 15 --><td th:text="${item.GREQ_AT_ID}" style="display: none"></td>
+									<!-- 16 --><td th:text="${item.SREQ_AT_ID}" style="display: none"></td>
+									<!-- 17 --><td th:text="${item.SREQ_AT_SIZE}" style="display: none"></td>
+									<!-- 18 --><td th:text="${item.SREQ_AT_DATA}" style="display: none"></td>
+									<!-- 19 --><td th:text="${item.AREQ_AT_ID}" style="display: none"></td>
+									<!-- 20 --><td th:text="${item.AREQ_AT_SIZE}" style="display: none"></td>
+									<!-- 21 --><td th:text="${item.AREQ_AT_PARAM}" style="display: none"></td>
+									<!-- 22 --><td th:text="${item.ARES_AT_ID}" style="display: none"></td>
+									<!-- 23 --><td th:text="${item.ARES_AT_RESULT}" style="display: none"></td>
+									<!-- 24 --><td th:text="${item.ARES_AT_SIZE}" style="display: none"></td>
+									<!-- 25 --><td th:text="${item.ARES_AT_PARAM}" style="display: none"></td>
+									<!-- 26 --><td th:text="${item.EREQ_AT_ID}" style="display: none"></td>
+									<!-- 27 --><td th:text="${item.EREQ_AT_SIZE}" style="display: none"></td>
+									<!-- 28 --><td th:text="${item.EREQ_AT_DATA}" style="display: none"></td>
+									<!-- 29 --><td th:text="${item.TOTAL_SEQ}" style="display: none"></td>
+									<!-- 30 --><td th:text="${item.CYCLE}" style="display: none"></td>
+									<!-- 31 --><td th:text="${item.IP}" style="display: none"></td>
+									<!-- 32 --><td th:text="${item.PORT}" style="display: none"></td>
 								</tr>
 
 							</tbody>
 						</table>
-			
+						 
+						 <!-- <div class="col-lg-12" id="ex1_Result1" ></div> 
+       					 <div class="col-lg-12" id="ex1_Result2" ></div> --> 
+
+
 						
 						
 						
@@ -124,19 +216,26 @@
 			<div id="content">
 
 				<!-- Topbar -->
+				
+				<form action="main" method="post">
 				<nav
 					class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 
 
 					<ul class="navbar-nav ml-auto">
-						<a href="#" class="btn btn-primary btn-icon-split"> <span
-							class="icon text-white-50"> <i class="fas fa-flag"></i>
+						<button type=reset class="btn btn-primary btn-icon-split" onClick="name_field_reset()"> <span
+							class="icon text-white-50"> <i class="fas fa-plus"></i>
 						</span> <span class="text">추가</span>
-						</a>
-						<a href="#" class="btn btn-danger btn-icon-split"> <span
-							class="icon text-white-50"> <i class="fas fa-trash"></i>
+						</button>
+						<button class="btn btn-danger btn-icon-split" onClick="isRemoved()"> <span
+							class="icon text-white-50"> <i class="fas fa-minus"></i>
 						</span> <span class="text">삭제</span>
-						</a>
+						</button>&nbsp;&nbsp;
+
+						<button class="btn btn-secondary btn-icon-split"> <span
+							class="icon text-white-50"> <i class="fas fa-trash"></i>
+						</span> <span class="text">삭제한 항목</span>
+						</button>
 					</ul>
 
 
@@ -189,10 +288,9 @@
 
 
 
-					<form action="main" method="post">
+				
 					
-					
-					
+				<div class="row">
 					
 					<div class="col-lg-7">
 					
@@ -214,15 +312,21 @@
   							
   							
   							<div class="input-group-append" id="button-addon4">
-    							<button type="submit" class="btn btn-outline-primary" onClick="button_click()">연결</button>
+    							<button type="submit" class="btn btn-outline-primary" onClick="send_button_click()">연결</button>
     							<button class="btn btn-outline-secondary" type="button">연결해제</button>
   							</div>
+  							
+  							
 						</div>
 						<br>
 					
+					</div>
+					<div class="col-lg-5">
+						<div class="col-lg-12" id="ex1_Result1" style="float:right;" ></div>
+  						<div class="col-lg-12" id="ex1_Result2" style="float:right;"></div>
+					</div>
+					
 				</div>
-					
-					
 					
 						<!-- Content Row -->
 						<div class="row">
@@ -328,25 +432,31 @@
 
 												</tr>
 												<tr>
-													<td><select class="form-control" name="TR"
-													id="TR">
+													<td>
+														<select class="form-control" name="TR"
+														id="TR">
 														<option>0</option>
 														<option>1</option>
-													</select></td>
-													<td><select class="form-control" name="TO"
-													id="TO">
-														<option>0</option>
-														<option>1</option>
-														<option>2</option>
-														<option selected>3</option>
-													</select></td>
-													<td><select class="form-control" name="RC"
-													id="RC">
+														</select>
+													</td>
+													<td>
+														<select class="form-control" name="TO_A"
+														id="TO_A">
 														<option>0</option>
 														<option>1</option>
 														<option>2</option>
 														<option selected>3</option>
-													</select></td>
+														</select>
+													</td>
+													<td>
+														<select class="form-control" name="RC"
+														id="RC">
+														<option>0</option>
+														<option>1</option>
+														<option>2</option>
+														<option selected>3</option>
+														</select>
+													</td>
 												</tr>
 											</tbody>
 										</table>
@@ -366,7 +476,7 @@
 											</div> 
 											
 
-										<table class="table table-bordered">
+										<table class="table table-bordered" style=display:none;>
 											<thead>
 												<tr>
 													<th scope="col">#</th>
@@ -378,7 +488,7 @@
 												<tr>
 													<th scope="row">ServiceID</th>
 													<td><input type="search" name="sidService"
-														id="sidService" class="form-control form-control-sm"
+														id="sidService" value="" class="form-control form-control-sm"
 														aria-controls="dataTable"></td>
 													<td><input type="search" name="didService"
 														id="didService" class="form-control form-control-sm"
@@ -420,11 +530,11 @@
 										<h6 class="m-0 font-weight-bold text-primary">Option</h6>
 									</div>
 									<div class="card-body">
-										<label>횟수 :<input type="search" name="totalSeq"
+										<label>횟수 :<input type="search" name="totalSeq" value=1
 											id="totalSeq" class="form-control form-control-sm"
 											placeholder="횟수" onfocus="this.placeholder=''"
 											onblur="this.placeholder='횟수'" aria-controls="dataTable">
-										</label> <label>주기 :<input type="search" name="cycle"
+										</label> <label>주기 :<input type="search" name="cycle" value=0
 											id="cycle" class="form-control form-control-sm"
 											placeholder="주기" onfocus="this.placeholder=''"
 											onblur="this.placeholder='주기'" aria-controls="dataTable">
@@ -482,8 +592,8 @@
 									<div class="card-header py-3">
 										<h6 class="m-0 font-weight-bold text-primary">GetReq</h6>
 									</div>
-									<div class="card-body">
-										<label>Attribute ID :<input type="search" name="atIdGreq" id="atIdGreq"
+									<div class="card-body" id="layer1">
+										<label>Attribute ID :<input type="search" name="gReq_atId" id="gReq_atId"
 											class="form-control form-control-sm" placeholder="AttributeID"
 											onfocus="this.placeholder=''" onblur="this.placeholder='AttributeID'"
 											aria-controls="dataTable">
@@ -496,18 +606,18 @@
 									<div class="card-header py-3">
 										<h6 class="m-0 font-weight-bold text-primary">SetReq</h6>
 									</div>
-									<div class="card-body">
-										<label>Attribute ID :<input type="search" name="atIdSreq" id="atIdSreq"
+									<div class="card-body" id="layer2">
+										<label>Attribute ID :<input type="search" name="sReq_atId" id="sReq_atId"
 											class="form-control form-control-sm" placeholder="AttributeID"
 											onfocus="this.placeholder=''" onblur="this.placeholder='AttributeID'"
 											aria-controls="dataTable">
 										</label><br>
-										<label>Attribute Size :<input type="search" name="atSizeSreq" id="atSizeSreq"
+										<label>Attribute Size :<input type="search" name="sReq_atSize" id="sReq_atSize"
 											class="form-control form-control-sm" placeholder="AttributeSize"
 											onfocus="this.placeholder=''" onblur="this.placeholder='AttributeSize'"
 											aria-controls="dataTable">
 										</label><br>
-										<label>Attribute Data :<input type="search" name="atDataSreq" id="atDataSreq"
+										<label>Attribute Data :<input type="search" name="sReq_atData" id="sReq_atData"
 											class="form-control form-control-sm" placeholder="AttributeData"
 											onfocus="this.placeholder=''" onblur="this.placeholder='AttributeData'"
 											aria-controls="dataTable">
@@ -521,19 +631,19 @@
 									<div class="card-header py-3">
 										<h6 class="m-0 font-weight-bold text-primary">ActionReq</h6>
 									</div>
-									<div class="card-body">
+									<div class="card-body" id="layer3">
 										
-										<label>Attribute ID :<input type="search" name="atIdAreq" id="atIdAreq"
+										<label>Attribute ID :<input type="search" name="aReq_atId" id="aReq_atId"
 											class="form-control form-control-sm" placeholder="AttributeID"
 											onfocus="this.placeholder=''" onblur="this.placeholder='AttributeID'"
 											aria-controls="dataTable">
 										</label><br>
-										<label>Action Size :<input type="search" name="actionSizeAreq" id="actionSizeAreq"
+										<label>Action Size :<input type="search" name="aReq_atSize" id="aReq_atSize"
 											class="form-control form-control-sm" placeholder="ActionSize"
 											onfocus="this.placeholder=''" onblur="this.placeholder='ActionSize'"
 											aria-controls="dataTable">
 										</label><br>
-										<label>Action Parameter :<input type="search" name="actionParameterAreq" id="actionParameterAreq"
+										<label>Action Parameter :<input type="search" name="aReq_atParam" id="aReq_atParam"
 											class="form-control form-control-sm" placeholder="ActionParameter"
 											onfocus="this.placeholder=''" onblur="this.placeholder='ActionParameter'"
 											aria-controls="dataTable">
@@ -546,24 +656,24 @@
 									<div class="card-header py-3">
 										<h6 class="m-0 font-weight-bold text-primary">ActionRes</h6>
 									</div>
-									<div class="card-body">
+									<div class="card-body" id="layer4">
 										
-										<label>Attribute ID :<input type="search" name="atIdAres" id="atIdAres"
+										<label>Attribute ID :<input type="search" name="aRes_atId" id="aRes_atId"
 											class="form-control form-control-sm" placeholder="AttributeID"
 											onfocus="this.placeholder=''" onblur="this.placeholder='AttributeID'"
 											aria-controls="dataTable">
 										</label><br>
-										<label>Result :<input type="search" name="resultAres" id="resultAres"
+										<label>Result :<input type="search" name="aRes_atResult" id="aRes_atResult"
 											class="form-control form-control-sm" placeholder="result"
 											onfocus="this.placeholder=''" onblur="this.placeholder='result'"
 											aria-controls="dataTable">
 										</label><br>
-										<label>Action Size :<input type="search" name="actionSizeAres" id="actionSizeAres"
+										<label>Action Size :<input type="search" name="aRes_atSize" id="aRes_atSize"
 											class="form-control form-control-sm" placeholder="ActionSize"
 											onfocus="this.placeholder=''" onblur="this.placeholder='ActionSize'"
 											aria-controls="dataTable">
 										</label><br>
-										<label>Action Parameter :<input type="search" name="actionParameterAres" id="actionParameterAres"
+										<label>Action Parameter :<input type="search" name="aRes_atParam" id="aRes_atParam"
 											class="form-control form-control-sm" placeholder="ActionParameter"
 											onfocus="this.placeholder=''" onblur="this.placeholder='ActionParameter'"
 											aria-controls="dataTable">
@@ -577,18 +687,18 @@
 									<div class="card-header py-3">
 										<h6 class="m-0 font-weight-bold text-primary">EventReq</h6>
 									</div>
-									<div class="card-body">
-										<label>Attribute ID :<input type="search" name="atIdEreq" id="atIdEreq"
+									<div class="card-body" id="layer5">
+										<label>Attribute ID :<input type="search" name="eReq_atId" id="eReq_atId"
 											class="form-control form-control-sm" placeholder="AttributeID"
 											onfocus="this.placeholder=''" onblur="this.placeholder='AttributeID'"
 											aria-controls="dataTable">
 										</label><br>
-										<label>Attribute Size :<input type="search" name="atSizeEreq" id="atSizeEreq"
+										<label>Attribute Size :<input type="search" name="eReq_atSize" id="eReq_atSize"
 											class="form-control form-control-sm" placeholder="AttributeSize"
 											onfocus="this.placeholder=''" onblur="this.placeholder='AttributeSize'"
 											aria-controls="dataTable">
 										</label><br>
-										<label>Attribute Data :<input type="search" name="atDataEreq" id="atDataEreq"
+										<label>Attribute Data :<input type="search" name="eReq_atData" id="eReq_atData"
 											class="form-control form-control-sm" placeholder="AttributeData"
 											onfocus="this.placeholder=''" onblur="this.placeholder='AttributeData'"
 											aria-controls="dataTable">
@@ -637,8 +747,11 @@
 								<input type="hidden" name="isSend" id="isSend" value="false"
 										class="form-control form-control-sm" 
 										aria-controls="dataTable">
-								<button type="submit" class="btn btn-outline-primary" onClick="button_click()">전송</button>
-								<button type="button" class="btn btn-outline-secondary">저장</button>
+								<input type="hidden" name="isSaved" id="isSaved" value="false"
+										class="form-control form-control-sm" 
+										aria-controls="dataTable">
+								<button type="submit" class="btn btn-outline-primary" onClick="send_button_click()">전송</button>
+								<button type="submit" class="btn btn-outline-secondary" onClick="save_button_click()">저장</button>
 
 							</div>
 						</div>

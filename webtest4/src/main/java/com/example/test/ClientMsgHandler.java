@@ -39,7 +39,7 @@ public class ClientMsgHandler {
 	public static void requestGet(Channel ch, TimsConfig timsConfig) {
 		 TimsMessageBuilder builder = new TimsMessageBuilder(timsConfig);
 		 //테스트용으로 101번 요청
-	     TimsMessage timsSendMessage = builder.getRequest((short)Integer.parseInt((String) MainController.usableMap.get("atIdGreq")));
+	     TimsMessage timsSendMessage = builder.getRequest((short)Integer.parseInt((String) MainController.usableMap.get("gReq_atId")));
 	     logTimsMsg = timsSendMessage;
 	     TransactionManager.write(new TcpChannelMessage(ch, null, timsSendMessage));
     }
@@ -86,7 +86,7 @@ public class ClientMsgHandler {
 	public static void responseAction(Channel ch, TimsConfig timsConfig) {
 		AtFtpResultResponse atResponse = new AtFtpResultResponse();
         //atResponse.setResult((short)Integer.parseInt((String) MainController.usableMap.get("resultAres")));
-        atResponse.setResult(MainController.toByte(MainController.usableMap,"resultAres"));
+        atResponse.setResult(MainController.toByte(MainController.usableMap,"aRes_atResult"));
         TimsMessageBuilder builder = new TimsMessageBuilder(timsConfig);
         TimsMessage timsMessage = builder.actionResponse(atResponse);
         TcpChannelMessage tcpChannelMessage = new TcpChannelMessage(ch, null, timsMessage);
