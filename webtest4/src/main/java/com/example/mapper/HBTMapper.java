@@ -13,9 +13,11 @@ public interface HBTMapper {
 //	public List<MainVO> getTestList();
 
 	public List<HbtVO> getHBTList();
-	
+	public List<HbtVO> getRemovedHBTList();
 	
 	///////////////////////////////
 	public int insertData(HashMap<String, Object> vo) throws Exception;
 	public int updateData(HashMap<String, Object> vo) throws Exception;
+	
+	public int restoreData(HashMap<String, Object> vo) throws Exception;
 }

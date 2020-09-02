@@ -42,4 +42,18 @@ public class HBTServiceImpl implements HBTService{
 		// TODO Auto-generated method stub
 		return mapper.updateData(vo);
 	}
+
+
+	@Override
+	public List<HbtVO> getRemovedHBTList() {
+		// TODO Auto-generated method stub
+		return mapper.getRemovedHBTList();
+	}
+
+
+	@Override
+	public int restoreData(HashMap<String, Object> vo) throws Exception {
+		// TODO Auto-generated method stub
+		return mapper.restoreData(vo);
+	}
 }

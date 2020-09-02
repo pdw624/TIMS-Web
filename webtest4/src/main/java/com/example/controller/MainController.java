@@ -39,15 +39,19 @@ public class MainController {
 	private HBTService hbt_service;
 	
 	
+	
+	private List<MainVO> testList;
+	private List<HbtVO> hbtList;
+	private List<HbtVO> removedHBTList;
 	public static HashMap<String,Object> usableMap;
 	
 	@RequestMapping("/main")
 	public String main(Model model, @RequestParam HashMap<String, Object> map, Model hbtModel) throws Exception {
 //		log.info("Controller 실행");
 		usableMap = new HashMap<String, Object>(map);
-		
 		hbtModel.addAllAttributes(map);
 
+		//웹 클라이언트에서 넘어온 값 확인용
 		System.out.println("----------------------------");
 		for (String key : map.keySet()) {
 			String value = (String) map.get(key);
@@ -55,56 +59,96 @@ public class MainController {
 		}
 		System.out.println("----------------------------");
 		
-		
-//		usableMap = new HashMap<String, Object>(map);
-//		System.out.println((String)MainController.usableMap.get("atIdGReq"));
-//		String tempStr=(String) MainController.usableMap.get("atIdGReq");
-		//int tempInt = Integer.parseInt(tempStr);
-		//System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!"+tempInt);
-		
-		//System.out.println(map.get("atIdGreq"));
-		
-		//처음 시작할 때 값이 있다면
-
+		//연결
 		connection(usableMap);
 		
 		if(map.isEmpty()==false && isConnected==true &&  Boolean.parseBoolean((String) map.get("isSend"))==true) {
 			ClientMsgHandler.msgSelect((String) map.get("opCode"));
 		}
 		
-		
-		//db조회값 화면 띄우기 테스트
-		////////////////////////////////////////////
-		List<MainVO> testList = new ArrayList<>();
-		testList = service.getTestList();
-
-		model.addAttribute("testList", testList);
-		
-		//db조회값 화면 띄우기 테스트(실제 사용할 table)
-		////////////////////////////////////////////
-		List<HbtVO> hbtList = new ArrayList<>();
-		hbtList = hbt_service.getHBTList();
-		
-		model.addAttribute("hbtList", hbtList);
+		//웹클라이언트 테이블 갱신
+		tableUpdate(model);
 		
 		//data Insert (저장 버튼을 눌렀을 때 실행돼야함)
-		////////////////////////////////////////////
 		if(Boolean.parseBoolean((String) map.get("isSaved"))==true) {
 			int temp;
 			temp = hbt_service.insertData(map);
 			model.addAttribute("hbtList", temp);
 			
-			hbtList = new ArrayList<>();
-			hbtList = hbt_service.getHBTList();
-			model.addAttribute("hbtList", hbtList);
+			tableUpdate(model);
 		}
 		
+		//data Remove (삭제 버튼을 눌렀을 때 실행돼야함)
+		if(Boolean.parseBoolean((String) map.get("isRemoved"))==true) {
+			String strTemp = (String)map.get("isRemovedThings");
+			String strTempArr[] = strTemp.split(",");
+			int removedThings[] = new int[strTempArr.length];
+			
+			for(int i=0; i<strTempArr.length; i++) {
+				removedThings[i] = Integer.parseInt(strTempArr[i]);
+			}
+			
+			map.put("isRemovedThings", removedThings);
+			
+			
+			for(int i=0; i<removedThings.length;i++) {
+				int temp;
+				temp = hbt_service.updateData(map);
+				model.addAttribute("hbtList", temp);
+			}
+			
+			tableUpdate(model);
+			
+		}
+		
+		//data Restore (복원 버튼을 눌렀을 때 실행돼야함)
+		if(Boolean.parseBoolean((String) map.get("isRestored"))==true) {
+			String strTemp = (String)map.get("isRestoredThings");
+			String strTempArr[] = strTemp.split(",");
+			int restoredThings[] = new int[strTempArr.length];
+			
+			for(int i=0; i<strTempArr.length; i++) {
+				restoredThings[i] = Integer.parseInt(strTempArr[i]);
+			}
+			
+			map.put("isRestoredThings", restoredThings);
+			
+			
+			for(int i=0; i<restoredThings.length;i++) {
+				int temp;
+				temp = hbt_service.restoreData(map);
+				model.addAttribute("hbtList", temp);
+			}
+			
+			tableUpdate(model);
+			
+		}
 		
 		return "test5";
 	}
 	
 	
-	
+	public void tableUpdate(Model model) {
+		//db조회값 화면 띄우기 테스트
+		////////////////////////////////////////////
+		testList = new ArrayList<>();
+		testList = service.getTestList();
+
+		model.addAttribute("testList", testList);
+				
+		//db조회값 화면 띄우기 테스트(실제 사용할 table)
+		////////////////////////////////////////////
+		hbtList = new ArrayList<>();
+		hbtList = hbt_service.getHBTList();
+				
+		model.addAttribute("hbtList", hbtList);
+		//삭제항목테이블
+		////////////////////////////////////////////
+		removedHBTList = new ArrayList<>();
+		removedHBTList = hbt_service.getRemovedHBTList();
+				
+		model.addAttribute("removedHBTList", removedHBTList);
+	}
 	
 	
 	public static byte toByte(HashMap<String, Object> map, String str) {
@@ -135,6 +179,7 @@ public class MainController {
 				int port = Integer.parseInt((String) map.get("port"));
 				// 전송받으면
 				if (isSend == true) {
+					//tct.shutdown();
 					// TimsClientTest(TimsTCP, TimsNet, TimsAttribute 참조 걸어둠)
 					TimsConfig timsConfig = new TimsConfig(toByte(map, "protocolIndicator"),
 															toByte(map, "protocolVersion"), 
@@ -151,5 +196,4 @@ public class MainController {
 			}
 		}
 	}
-
 }

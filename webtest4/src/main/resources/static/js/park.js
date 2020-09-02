@@ -84,9 +84,10 @@ function save_button_click(){
 function name_field_reset(){
 	$("#ex1_Result2").html("");
 	goChange("OP_GET_REQ");
+	alert("추가추가");
 }
 //삭제버튼
-function isRemoved(){
+function remove_button_click(){
 	if ($("input:checkbox[name=user_CheckBox]").is(":checked") == true) {
 		//체크가 되어있을때. 
             alert("WOW hihi remove"); 
@@ -100,18 +101,67 @@ function isRemoved(){
 				var td = tr.children();
 				
 				//1번 값이 테스트코드이므로 1번 값을 가져온다.
-				var testCode = td.eq(1).text()+" ";
+				var testCode = td.eq(1).text();
 				
 				// 가져온 값을 배열에 담는다.
 				tdArr.push(testCode);
+				$("#isRemovedThings").val(tdArr);
 			});
+			document.getElementById("isRemoved").value="true";
 			alert("WOW hihi remove : "+tdArr);  
 				
     }else{
-				alert("ㅠㅠ no checked");  
-                //체크가 안되어있을때.
+			alert("ㅠㅠ no checked");  
+            //체크가 안되어있을때.
     }
 }
+
+
+
+    function sampleModalPopup(){
+        // 팝업 호출 url
+        var url = "http://localhost:8080/main";
+        
+        // 팝업 호출
+        $("#exampleModalCenter > .modal-dialog").load(url, function() { 
+            $("#exampleModalCenter").modal("show"); 
+        });
+    }
+
+
+//복구버튼
+function restore_button_click(){
+	if ($("input:checkbox[name=restore_CheckBox]").is(":checked") == true) {
+		//체크가 되어있을때. 
+            alert("WOW hihi restore"); 
+			var checkbox = $("input[name=restore_CheckBox]:checked"); 
+			var tdArr = new Array();    // 배열 선언
+            
+            checkbox.each(function(i) {
+				// checkbox.parent() : checkbox의 부모는 <td>이다.
+				// checkbox.parent().parent() : <td>의 부모이므로 <tr>이다.
+				var tr = checkbox.parent().parent().eq(i);
+				var td = tr.children();
+				
+				//1번 값이 테스트코드이므로 1번 값을 가져온다.
+				var testCode = td.eq(1).text();
+				
+				// 가져온 값을 배열에 담는다.
+				tdArr.push(testCode);
+				$("#isRestoredThings").val(tdArr);
+			});
+			document.getElementById("isRestored").value="true";
+			alert("WOW hihi restore : "+tdArr);  
+				
+    }else{
+			alert("ㅠㅠ no checked");  
+            //체크가 안되어있을때.
+    }
+}
+
+
+
+
 
         // 테이블의 Row 클릭시 값 가져오기
         $("#dataTable tr").click(function(){     

@@ -51,7 +51,7 @@ public class TimsClientHandlerTest extends SimpleChannelInboundHandler<TimsMessa
 	@Override
 	protected void channelRead0(ChannelHandlerContext ctx, TimsMessage timsMessage) throws Exception {
 		//logger.info("채널읽기");
-		//logger.info("받은페이로드(init):{}",timsMessage.getPayload());
+		logger.info("받은페이로드 :{}",timsMessage.getPayload());
 		
 		if(timsMessage.getHeader().getOpCode()==PlCode.OP_INIT_REQ) {
 			logger.info("Init Request Received!!!");
@@ -99,6 +99,7 @@ public class TimsClientHandlerTest extends SimpleChannelInboundHandler<TimsMessa
     public void channelUnregistered(ChannelHandlerContext ctx) throws Exception {
         final EventLoop loop = ctx.channel().eventLoop();
         logger.info("채널미등록");
+        
         loop.schedule(new Runnable() {
             public void run() {
                 Bootstrap b = timsClient.configureBootstrap(new Bootstrap(), loop);

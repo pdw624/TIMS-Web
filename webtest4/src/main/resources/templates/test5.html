@@ -218,26 +218,162 @@
 				<!-- Topbar -->
 				
 				<form action="main" method="post">
-				<nav
-					class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-
+				
+				<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+					
 					<ul class="navbar-nav ml-auto">
 						<button type=reset class="btn btn-primary btn-icon-split" onClick="name_field_reset()"> <span
 							class="icon text-white-50"> <i class="fas fa-plus"></i>
 						</span> <span class="text">추가</span>
 						</button>
-						<button class="btn btn-danger btn-icon-split" onClick="isRemoved()"> <span
+						
+						<button type="send" class="btn btn-danger btn-icon-split" onClick="remove_button_click()"> <span
 							class="icon text-white-50"> <i class="fas fa-minus"></i>
 						</span> <span class="text">삭제</span>
-						</button>&nbsp;&nbsp;
-
-						<button class="btn btn-secondary btn-icon-split"> <span
+						</button>
+						
+						<button type="button" class="btn btn-secondary btn-icon-split"  data-toggle="modal" data-target="#exampleModalCenter"> <span
 							class="icon text-white-50"> <i class="fas fa-trash"></i>
 						</span> <span class="text">삭제한 항목</span>
 						</button>
-					</ul>
 
+						<!-- Modal -->
+						<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+						  <div class="modal-dialog modal-dialog-centered" role="document">
+						    <div class="modal-content">
+						      <div class="modal-header">
+						        <h5 class="modal-title" id="exampleModalLongTitle">삭제된 항목</h5>
+						        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						          <span aria-hidden="true">&times;</span>
+						        </button>
+						      </div>
+						      <div class="modal-body">
+						        <table class="table table-bordered table-hover" id="removedTable" width="100%"
+							cellspacing="0">
+							<thead>
+								<tr>
+									<th>No.</th>
+									<th>테스트코드</th>
+									<th>테스트명</th>
+									<th>#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>	
+									<th style="display: none">#</th>	
+								</tr>
+							</thead>
+							<tfoot>
+								<tr>
+									<th>No.</th>
+									<th>테스트코드</th>
+									<th>테스트명</th>
+									<th>#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>	
+									<th style="display: none">#</th>
+									<th style="display: none">#</th>	
+									<th style="display: none">#</th>				
+								</tr>
+							</tfoot>
+							<tbody>
+								<tr th:each="item, stat : ${removedHBTList}">
+									<!-- 0 --><td scope="row" th:text="${stat.count}"></td>
+									<!-- 1 --><td th:text="${item.TEST_CODE}"></td>
+									<!-- 2 --><td th:text="${item.TEST_NAME}"></td>
+									<!-- 3 --><td><input type="checkbox" name="restore_CheckBox" ></td>	
+									<!-- 4 --><td th:text="${item.PROTOCOL_INDICATOR}" style="display: none"></td>
+									<!-- 5 --><td th:text="${item.HEADERSIZE}" style="display: none"></td>
+									<!-- 6 --><td th:text="${item.PROTOCOL_VERSION}" style="display: none"></td>
+									<!-- 7 --><td th:text="${item.PACKET_ID}" style="display: none"></td>
+									<!-- 8 --><td th:text="${item.LF}" style="display: none"></td>
+									<!-- 9 --><td th:text="${item.RF}" style="display: none"></td>
+									<!-- 10 --><td th:text="${item.CE}" style="display: none"></td>
+									<!-- 11 --><td th:text="${item.TR}" style="display: none"></td>
+									<!-- 12 --><td th:text="${item.TO_A}" style="display: none"></td>
+									<!-- 13 --><td th:text="${item.RC}" style="display: none"></td>
+									<!-- 14 --><td th:text="${item.OP_CODE}" style="display: none"></td>
+									<!-- 15 --><td th:text="${item.GREQ_AT_ID}" style="display: none"></td>
+									<!-- 16 --><td th:text="${item.SREQ_AT_ID}" style="display: none"></td>
+									<!-- 17 --><td th:text="${item.SREQ_AT_SIZE}" style="display: none"></td>
+									<!-- 18 --><td th:text="${item.SREQ_AT_DATA}" style="display: none"></td>
+									<!-- 19 --><td th:text="${item.AREQ_AT_ID}" style="display: none"></td>
+									<!-- 20 --><td th:text="${item.AREQ_AT_SIZE}" style="display: none"></td>
+									<!-- 21 --><td th:text="${item.AREQ_AT_PARAM}" style="display: none"></td>
+									<!-- 22 --><td th:text="${item.ARES_AT_ID}" style="display: none"></td>
+									<!-- 23 --><td th:text="${item.ARES_AT_RESULT}" style="display: none"></td>
+									<!-- 24 --><td th:text="${item.ARES_AT_SIZE}" style="display: none"></td>
+									<!-- 25 --><td th:text="${item.ARES_AT_PARAM}" style="display: none"></td>
+									<!-- 26 --><td th:text="${item.EREQ_AT_ID}" style="display: none"></td>
+									<!-- 27 --><td th:text="${item.EREQ_AT_SIZE}" style="display: none"></td>
+									<!-- 28 --><td th:text="${item.EREQ_AT_DATA}" style="display: none"></td>
+									<!-- 29 --><td th:text="${item.TOTAL_SEQ}" style="display: none"></td>
+									<!-- 30 --><td th:text="${item.CYCLE}" style="display: none"></td>
+									<!-- 31 --><td th:text="${item.IP}" style="display: none"></td>
+									<!-- 32 --><td th:text="${item.PORT}" style="display: none"></td>
+								</tr>
+
+							</tbody>
+						</table>
+						      </div>
+						      <div class="modal-footer">
+						        <button type="button" class="btn btn-secondary" data-dismiss="modal">닫기</button>
+						        <button type="send" class="btn btn-primary" onClick="restore_button_click()">복원</button>
+						      </div>
+						    </div>
+						  </div>
+						</div>
+						
+						&nbsp;&nbsp;
+					</ul>
 
 				</nav>
 				<!-- End of Topbar -->
@@ -742,17 +878,59 @@
 
 
 								</div>
-
 								
+								<input type="hidden" name="isRemovedThings" id="isRemovedThings" 
+										class="form-control form-control-sm" 
+										aria-controls="dataTable">
+								<input type="hidden" name="isRestoredThings" id="isRestoredThings" 
+										class="form-control form-control-sm" 
+										aria-controls="dataTable">		
+										
+								<input type="hidden" name="isRemoved" id="isRemoved" value="false"
+										class="form-control form-control-sm" 
+										aria-controls="dataTable">
 								<input type="hidden" name="isSend" id="isSend" value="false"
 										class="form-control form-control-sm" 
 										aria-controls="dataTable">
 								<input type="hidden" name="isSaved" id="isSaved" value="false"
 										class="form-control form-control-sm" 
 										aria-controls="dataTable">
+								<input type="hidden" name="isRestored" id="isRestored" value="false"
+										class="form-control form-control-sm" 
+										aria-controls="dataTable">
+										
+										
 								<button type="submit" class="btn btn-outline-primary" onClick="send_button_click()">전송</button>
-								<button type="submit" class="btn btn-outline-secondary" onClick="save_button_click()">저장</button>
-
+								<button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#saveModalCenter">저장</button>
+								
+								
+								<!-- Modal -->
+								<div class="modal fade" id="saveModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+								  <div class="modal-dialog modal-dialog-centered" role="document">
+								    <div class="modal-content">
+								      <div class="modal-header">
+								        <h5 class="modal-title" id="exampleModalLongTitle">저장</h5>
+								        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+								          <span aria-hidden="true">&times;</span>
+								        </button>
+								      </div>
+								      <div class="modal-body">
+								      	<label>저장할 테스트명을 입력해 주세요 </label><br><br>
+									      	<input type="search" name="testName" id="testName"
+												class="form-control form-control-sm" placeholder="Test Name"
+												onfocus="this.placeholder=''" onblur="this.placeholder='Test Name'"
+												aria-controls="dataTable">
+										
+								      </div>
+								      <div class="modal-footer">
+								        <button type="button" class="btn btn-secondary" data-dismiss="modal" >닫기</button>
+								        <button type="submit" class="btn btn-primary" onClick="save_button_click()">저장</button>
+								      </div>
+								    </div>
+								  </div>
+								</div>
+								
+								
 							</div>
 						</div>
 					</form>

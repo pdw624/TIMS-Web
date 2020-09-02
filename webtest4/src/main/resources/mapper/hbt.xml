@@ -8,18 +8,23 @@
 	<select id="getHBTList" resultType="com.example.domain.HbtVO">
 		SELECT *
 		FROM MSG_FORM
+		WHERE IS_REMOVED = 0
 	</select>
 
-
+	<select id="getRemovedHBTList" resultType="com.example.domain.HbtVO">
+		SELECT *
+		FROM MSG_FORM
+		WHERE IS_REMOVED = 1
+	</select>
 
  	<insert id="insertData" parameterType="hashMap" useGeneratedKeys="true" keyProperty="TEST_CODE">
-		INSERT INTO MSG_FORM(PROTOCOL_INDICATOR, HEADERSIZE, PROTOCOL_VERSION, PACKET_ID, LF, RF, CE, TR, TO_A, RC, OP_CODE, 
+		INSERT INTO MSG_FORM(TEST_NAME, PROTOCOL_INDICATOR, HEADERSIZE, PROTOCOL_VERSION, PACKET_ID, LF, RF, CE, TR, TO_A, RC, OP_CODE, 
 				GREQ_AT_ID, 
 				SREQ_AT_ID, SREQ_AT_SIZE, SREQ_AT_DATA, 
 				AREQ_AT_ID, AREQ_AT_SIZE, AREQ_AT_PARAM, 
 				ARES_AT_ID, ARES_AT_RESULT, ARES_AT_SIZE, ARES_AT_PARAM,
 				EREQ_AT_ID, EREQ_AT_SIZE, EREQ_AT_DATA, TOTAL_SEQ, CYCLE, IP, PORT)
-		VALUES(#{protocolIndicator}, #{headerSize}, #{protocolVersion}, #{packetID}, #{LF}, #{RF}, #{CE}, #{TR}, #{TO_A},  #{RC}, #{opCode},
+		VALUES(#{testName}, #{protocolIndicator}, #{headerSize}, #{protocolVersion}, #{packetID}, #{LF}, #{RF}, #{CE}, #{TR}, #{TO_A},  #{RC}, #{opCode},
 				 #{gReq_atId, jdbcType=VARCHAR},  
 				 #{sReq_atId, jdbcType=VARCHAR}, #{sReq_atSize, jdbcType=VARCHAR}, #{sReq_atData, jdbcType=VARCHAR},
 				 #{aReq_atId, jdbcType=VARCHAR}, #{aReq_atSize, jdbcType=VARCHAR}, #{aReq_atParam, jdbcType=VARCHAR},
@@ -30,6 +35,22 @@
 
 	<update id="updateData" parameterType="hashMap">
 		
+			UPDATE MSG_FORM
+			SET IS_REMOVED = 1
+			WHERE TEST_CODE IN 
+			<foreach collection="isRemovedThings" item="item" separator="," index="index" open="(" close=")">
+				#{item}
+    		</foreach>
+	</update>
+	
+	<update id="restoreData" parameterType="hashMap">
+		
+			UPDATE MSG_FORM
+			SET IS_REMOVED = 0
+			WHERE TEST_CODE IN 
+			<foreach collection="isRestoredThings" item="item" separator="," index="index" open="(" close=")">
+				#{item}
+    		</foreach>
 	</update>
 <!--                                        
  	<insert id="insertData" parameterType="hashMap" useGeneratedKeys="true" keyProperty="TEST_CODE">
