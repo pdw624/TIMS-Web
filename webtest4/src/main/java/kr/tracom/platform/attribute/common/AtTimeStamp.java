@@ -38,6 +38,7 @@ public class AtTimeStamp extends AtData {
 
 	public AtTimeStamp(String nowDatetime) {
 		setDateTime(nowDatetime);
+		attrId = AtCode.TIMESTAMP;
 	}
 
 	public static String getTimeStamp(ByteHelper byteHelper) {

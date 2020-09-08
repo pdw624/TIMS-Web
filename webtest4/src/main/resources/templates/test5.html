@@ -44,7 +44,7 @@
 			<!-- DataTales Example -->
 			<div class="card shadow mb-4">
 				<div class="card-header py-3">
-					<h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+					<h6 class="m-0 font-weight-bold text-primary">Test Tables</h6>
 				</div>
 				<div class="card-body">
 					<div class="table-responsive">
@@ -90,8 +90,8 @@
 							<thead>
 								<tr>
 									<th>No.</th>
-									<th>테스트코드</th>
-									<th>테스트명</th>
+									<th><center>테스트코드</center></th>
+									<th><center>테스트명</center></th>
 									<th>#</th>
 									<th style="display: none">#</th>
 									<th style="display: none">#</th>
@@ -122,13 +122,14 @@
 									<th style="display: none">#</th>
 									<th style="display: none">#</th>	
 									<th style="display: none">#</th>	
+									<th style="display: none">#</th>
 								</tr>
 							</thead>
 							<tfoot>
 								<tr>
 									<th>No.</th>
-									<th>테스트코드</th>
-									<th>테스트명</th>
+									<th><center>테스트코드</center></th>
+									<th><center>테스트명</center></th>
 									<th>#</th>
 									<th style="display: none">#</th>
 									<th style="display: none">#</th>
@@ -158,13 +159,14 @@
 									<th style="display: none">#</th>	
 									<th style="display: none">#</th>
 									<th style="display: none">#</th>	
+									<th style="display: none">#</th>
 									<th style="display: none">#</th>				
 								</tr>
 							</tfoot>
 							<tbody>
 								<tr th:each="item, stat : ${hbtList}">
-									<!-- 0 --><td scope="row" th:text="${stat.count}"></td>
-									<!-- 1 --><td th:text="${item.TEST_CODE}"></td>
+									<!-- 0 --><td scope="row" th:text="${stat.count}" style="text-align:right;"></td>
+									<!-- 1 --><td th:text="${item.TEST_CODE}" style="text-align:center;"></td>
 									<!-- 2 --><td th:text="${item.TEST_NAME}"></td>
 									<!-- 3 --><td><input type="checkbox" name="user_CheckBox" ></td>	
 									<!-- 4 --><td th:text="${item.PROTOCOL_INDICATOR}" style="display: none"></td>
@@ -194,8 +196,9 @@
 									<!-- 28 --><td th:text="${item.EREQ_AT_DATA}" style="display: none"></td>
 									<!-- 29 --><td th:text="${item.TOTAL_SEQ}" style="display: none"></td>
 									<!-- 30 --><td th:text="${item.CYCLE}" style="display: none"></td>
-									<!-- 31 --><td th:text="${item.IP}" style="display: none"></td>
-									<!-- 32 --><td th:text="${item.PORT}" style="display: none"></td>
+									<!-- 31 --><td th:text="${item.RESULT}" style="display: none"></td>
+									<!-- 32 --><td th:text="${item.IP}" style="display: none"></td>
+									<!-- 33 --><td th:text="${item.PORT}" style="display: none"></td>
 								</tr>
 
 							</tbody>
@@ -217,7 +220,7 @@
 
 				<!-- Topbar -->
 				
-				<form action="main" method="post">
+				<form action="main" method="post" id=main_form>
 				
 				<nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
 					
@@ -285,6 +288,7 @@
 									<th style="display: none">#</th>
 									<th style="display: none">#</th>	
 									<th style="display: none">#</th>	
+									<th style="display: none">#</th>	
 								</tr>
 							</thead>
 							<tfoot>
@@ -320,6 +324,7 @@
 									<th style="display: none">#</th>
 									<th style="display: none">#</th>	
 									<th style="display: none">#</th>
+									<th style="display: none">#</th>	
 									<th style="display: none">#</th>	
 									<th style="display: none">#</th>				
 								</tr>
@@ -357,8 +362,9 @@
 									<!-- 28 --><td th:text="${item.EREQ_AT_DATA}" style="display: none"></td>
 									<!-- 29 --><td th:text="${item.TOTAL_SEQ}" style="display: none"></td>
 									<!-- 30 --><td th:text="${item.CYCLE}" style="display: none"></td>
-									<!-- 31 --><td th:text="${item.IP}" style="display: none"></td>
-									<!-- 32 --><td th:text="${item.PORT}" style="display: none"></td>
+									<!-- 31 --><td th:text="${item.RESULT}" style="display: none"></td>
+									<!-- 32 --><td th:text="${item.IP}" style="display: none"></td>
+									<!-- 33 --><td th:text="${item.PORT}" style="display: none"></td>
 								</tr>
 
 							</tbody>
@@ -448,9 +454,8 @@
   							
   							
   							<div class="input-group-append" id="button-addon4">
-    							<button type="submit" class="btn btn-outline-primary" onClick="send_button_click()">연결</button>
-    							<button class="btn btn-outline-secondary" type="button">연결해제</button>
-  							</div>
+    							<button type="submit" class="btn btn-outline-primary" onClick="conn_button_click()">연결</button>
+    						</div>
   							
   							
 						</div>
@@ -604,9 +609,9 @@
 													id="opCode" onChange="goChange(this.value)">
 													<option>OP_GET_REQ</option>
 													<option>OP_SET_REQ</option>
-													<option>OP_ACTION_REQ</option>
-													<option>OP_ACTION_RES</option>
-													<option>OP_EVENT_REQ</option>
+													<option style="color:#D8D8D8" disabled>OP_ACTION_REQ</option>
+													<option style="color:#D8D8D8" disabled>OP_ACTION_RES</option>
+													<option style="color:#D8D8D8" disabled>OP_EVENT_REQ</option>
 								
 												</select>
 											</div> 
@@ -731,7 +736,7 @@
 									<div class="card-body" id="layer1">
 										<label>Attribute ID :<input type="search" name="gReq_atId" id="gReq_atId"
 											class="form-control form-control-sm" placeholder="AttributeID"
-											onfocus="this.placeholder=''" onblur="this.placeholder='AttributeID'"
+											value=100 onfocus="this.placeholder=''" onblur="this.placeholder='AttributeID'"
 											aria-controls="dataTable">
 										</label>
 									</div>
@@ -743,19 +748,19 @@
 										<h6 class="m-0 font-weight-bold text-primary">SetReq</h6>
 									</div>
 									<div class="card-body" id="layer2">
-										<label>Attribute ID :<input type="search" name="sReq_atId" id="sReq_atId"
+										<label>Attribute ID :<input readonly="readonly" type="search" name="sReq_atId" id="sReq_atId"
 											class="form-control form-control-sm" placeholder="AttributeID"
-											onfocus="this.placeholder=''" onblur="this.placeholder='AttributeID'"
+											value=100 onfocus="this.placeholder=''" onblur="this.placeholder='AttributeID'"
 											aria-controls="dataTable">
 										</label><br>
-										<label>Attribute Size :<input type="search" name="sReq_atSize" id="sReq_atSize"
+										<label>Attribute Size :<input readonly="readonly" type="search" name="sReq_atSize" id="sReq_atSize"
 											class="form-control form-control-sm" placeholder="AttributeSize"
-											onfocus="this.placeholder=''" onblur="this.placeholder='AttributeSize'"
+											value=7 onfocus="this.placeholder=''" onblur="this.placeholder='AttributeSize'"
 											aria-controls="dataTable">
 										</label><br>
-										<label>Attribute Data :<input type="search" name="sReq_atData" id="sReq_atData"
+										<label>Attribute Data :<input readonly="readonly" type="search" name="sReq_atData" id="sReq_atData"
 											class="form-control form-control-sm" placeholder="AttributeData"
-											onfocus="this.placeholder=''" onblur="this.placeholder='AttributeData'"
+											value='Date Time' onfocus="this.placeholder=''" onblur="this.placeholder='AttributeData'"
 											aria-controls="dataTable">
 										</label>
 									</div>
@@ -869,9 +874,9 @@
 									</div>
 									-->
 										<div class="form-group">
-
+											
 											<textarea class="form-control" name="result" id="result"
-												rows="10"></textarea>
+												rows="10" readonly="readonly"></textarea>
 										</div>
 
 									</div>
@@ -890,6 +895,9 @@
 										class="form-control form-control-sm" 
 										aria-controls="dataTable">
 								<input type="hidden" name="isSend" id="isSend" value="false"
+										class="form-control form-control-sm" 
+										aria-controls="dataTable">
+								<input type="hidden" name="isConn" id="isConn" value="false"
 										class="form-control form-control-sm" 
 										aria-controls="dataTable">
 								<input type="hidden" name="isSaved" id="isSaved" value="false"
@@ -942,11 +950,11 @@
 
 		<!-- jQuery (부트스트랩의 자바스크립트 플러그인을 위해 필요합니다) -->
     	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-		
+
 		<script src="js/park.js"></script>
 		<!-- Optional JavaScript -->
 		<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+		<script src="https://code.jquery.com/jquery-3.4.1.js"
 			integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
 			crossorigin="anonymous"></script>
 		<script

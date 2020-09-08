@@ -16,6 +16,7 @@ import io.netty.channel.EventLoop;
 import io.netty.channel.SimpleChannelInboundHandler;
 import kr.tracom.platform.attribute.AtCode;
 import kr.tracom.platform.attribute.common.AtDeviceAuth;
+import kr.tracom.platform.attribute.manager.AttributeManager;
 import kr.tracom.platform.net.config.TimsConfig;
 import kr.tracom.platform.net.protocol.TimsMessage;
 import kr.tracom.platform.net.protocol.TimsMessageBuilder;
@@ -29,9 +30,13 @@ public class TimsClientHandlerTest extends SimpleChannelInboundHandler<TimsMessa
 	private final Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
 	
 	public static ChannelHandlerContext usableCTX;
+	public static String initStr = "[RCVD Payload] : ";
+	public static String getStr = "[RCVD Payload] : ";
 	
 	public TimsClientHandlerTest(TimsClientTest timsClient) {
 		this.timsClient = timsClient;
+		//서버가 메시지를 보내줘도 client측에서 attribute를 해석하지 못하면 에러코드 16발생. 아래 코드 작성 필요
+		AttributeManager.bind(AttributeManager.COMMON_ATTRIBUTE);
 	}
 	
 	@Override
@@ -52,16 +57,20 @@ public class TimsClientHandlerTest extends SimpleChannelInboundHandler<TimsMessa
 	protected void channelRead0(ChannelHandlerContext ctx, TimsMessage timsMessage) throws Exception {
 		//logger.info("채널읽기");
 		logger.info("받은페이로드 :{}",timsMessage.getPayload());
+		if(MainController.isConnected == false) {
+			MainController.isConnected = true;
+		}
+		
 		
 		if(timsMessage.getHeader().getOpCode()==PlCode.OP_INIT_REQ) {
 			logger.info("Init Request Received!!!");
 			//logger.info("Init Request getPayload : "+timsMessage.getPayload());
 			ClientMsgHandler.responseAuth(ctx.channel(), timsClient.getTimsConfig());
+			//initRequest 메시지를 Controller에 전달
+			Object initObj = timsMessage.getPayload();
+			initStr += String.valueOf(initObj);
+			//System.out.println(initStr);
 		}
-		if(MainController.isConnected == false) {
-			MainController.isConnected = true;
-		}
-		
 		
 		//ClientMsgHandler.requestGet(ctx.channel(), timsClient.getTimsConfig());
 		//ClientMsgHandler.requestSet(ctx.channel(), timsClient.getTimsConfig());
@@ -69,13 +78,15 @@ public class TimsClientHandlerTest extends SimpleChannelInboundHandler<TimsMessa
 		//ClientMsgHandler.msgSelect((String) MainController.usableMap.get("opCode"));
 		if(timsMessage.getHeader().getOpCode()==PlCode.OP_GET_RES) {
 			logger.info("Get Response Received!!!");
+			Object getObj = timsMessage.getPayload();
+			getStr += String.valueOf(getObj);
+			//System.out.println(getStr);
 		}
 		
 		
 		//logger.info("Get Request 보냄!!!");
-		
-		
-		
+		//getStr = "";
+		//initStr = "";
 	}
 	
 	

@@ -46,6 +46,8 @@ public class HbtVO {
 	private byte TOTAL_SEQ;
 	private float CYCLE;
 	
+	private String RESULT;
+	
 	private String IP;
 	private int PORT;
 	

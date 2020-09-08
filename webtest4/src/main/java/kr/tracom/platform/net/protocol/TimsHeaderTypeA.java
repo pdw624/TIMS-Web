@@ -8,12 +8,14 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper=false)
 public class TimsHeaderTypeA extends TimsHeader {
-	public static final int SIZE = TimsHeader.SIZE + 12;
+	public static final int SIZE = TimsHeader.SIZE + 16;//12>>16
 	
 	private TimsAddress srcAddress;
 	private TimsAddress dstAddress;
 	private short currentIndex;
 	private short totalIndex;
+	private short reserved1;//추가
+	private short reserved2;//추가
 	
 	public TimsHeaderTypeA(TimsConfig timsConfig) {
 		super(timsConfig);
@@ -23,6 +25,8 @@ public class TimsHeaderTypeA extends TimsHeader {
 		this.dstAddress = new TimsAddress();
 		this.currentIndex = 0;
 		this.totalIndex = 0;
+		this.reserved1 = 0;//추가
+		this.reserved2 = 0;//추가
 	}
 
 	public int getSize() {
@@ -35,6 +39,9 @@ public class TimsHeaderTypeA extends TimsHeader {
         this.dstAddress.decode(byteHelper);
         this.currentIndex = byteHelper.getShort();
         this.totalIndex = byteHelper.getShort();
+        this.reserved1 = byteHelper.getShort();//추가
+        this.reserved2 = byteHelper.getShort();//추가
+
 	}
 
 	public void encode(ByteHelper byteHelper) {
@@ -43,6 +50,9 @@ public class TimsHeaderTypeA extends TimsHeader {
 		this.dstAddress.encode(byteHelper);
 		byteHelper.setShort(this.currentIndex);
 		byteHelper.setShort(this.totalIndex);
+		byteHelper.setShort(this.reserved1);//추가
+		byteHelper.setShort(this.reserved2);//추가
+
 	}
 	
 	public String toLog() {

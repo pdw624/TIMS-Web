@@ -1,4 +1,4 @@
-var protocolIndicator = document.getElementById("protocolIndicator");
+/*var protocolIndicator = document.getElementById("protocolIndicator");
 var pi_val;
 
 var protocolOption = document.getElementById("protocolOption");
@@ -6,7 +6,12 @@ var po_val;
 
 var opCode = document.getElementById("opCode");
 var op_val;
+*/
+
 var temp;
+
+
+
 /*
 for(i=0; i<protocolOption.options.length; i++) {
     if(protocolOption.options[i].selected == true) {
@@ -25,6 +30,7 @@ function goChange(val){
 		document.all.actionReq.style.display="none";
 		document.all.actionRes.style.display="none";
 		document.all.eventReq.style.display="none";
+		$("#result").html("");
 		//alert(val);
 	}
 	else if(val=="OP_SET_REQ"){
@@ -33,6 +39,7 @@ function goChange(val){
 		document.all.actionReq.style.display="none";
 		document.all.actionRes.style.display="none";
 		document.all.eventReq.style.display="none";
+		$("#result").html("");
 		//alert(val);
 	}else if(val=="OP_ACTION_REQ"){
 		document.all.actionReq.style.display="";
@@ -40,6 +47,7 @@ function goChange(val){
 		document.all.setReq.style.display="none";
 		document.all.actionRes.style.display="none";
 		document.all.eventReq.style.display="none";
+		$("#result").html("");
 		//alert(val);
 	}
 	else if(val=="OP_ACTION_RES"){
@@ -48,6 +56,7 @@ function goChange(val){
 		document.all.setReq.style.display="none";
 		document.all.actionReq.style.display="none";
 		document.all.eventReq.style.display="none";
+		$("#result").html("");
 		//alert(val);
 	}
 	else if(val=="OP_EVENT_REQ"){
@@ -56,41 +65,81 @@ function goChange(val){
 		document.all.setReq.style.display="none";
 		document.all.actionReq.style.display="none";
 		document.all.actionRes.style.display="none";
+		$("#result").html("");
 		//alert(val);
 	}
 	
 }
 
-//전송버튼
+//연결
+function conn_button_click(){
+	document.getElementById("isConn").value="true";
+	temp = document.getElementById("isConn").value;
+	
+	var connectForm = $("#main_form").serialize();
+    event.preventDefault();
+
+     $.ajax({
+        type: 'post',
+        url: 'connect',
+        data: connectForm,
+        success: function (result, status, xhr) {
+            console.log(result);
+			//alert(result);
+			$('#result').text(result);
+        },
+        error: function (xhr, status, err) {
+            console.log("에러발생")
+        }
+     });
+    console.log("연결 완료");
+	
+	//alert("hello " + temp);
+}
+
+
+//전송
 function send_button_click(){
-	//pi_val = protocolIndicator.options[protocolIndicator.selectedIndex].value;
-	//console.log(button_click.pi_val);
 	document.getElementById("isSend").value="true";
 	temp = document.getElementById("isSend").value;
-	alert("hello " + temp);
+	
+	var connectForm = $("#main_form").serialize();
+    event.preventDefault();
+
+     $.ajax({
+        type: 'post',
+        url: 'send',
+        data: connectForm,
+        success: function (result, status, xhr) {
+            console.log(result);
+			//alert(result);
+			$('#result').text(result);
+        },
+        error: function (xhr, status, err) {
+            console.log("에러발생")
+        }
+     });
 }
 
 
 //저장버튼
 function save_button_click(){
-	//pi_val = protocolIndicator.options[protocolIndicator.selectedIndex].value;
-	//console.log(button_click.pi_val);
 	document.getElementById("isSaved").value="true";
 	temp = document.getElementById("isSaved").value;
-	alert("hello " + temp);
 }
 
 //추가버튼
 function name_field_reset(){
 	$("#ex1_Result2").html("");
+	$("#result").html("");
 	goChange("OP_GET_REQ");
-	alert("추가추가");
+	//alert("추가추가");
 }
 //삭제버튼
 function remove_button_click(){
 	if ($("input:checkbox[name=user_CheckBox]").is(":checked") == true) {
-		//체크가 되어있을때. 
-            alert("WOW hihi remove"); 
+			//체크가 되어있을때. 
+            //alert("WOW hihi remove"); 
 			var checkbox = $("input[name=user_CheckBox]:checked"); 
 			var tdArr = new Array();    // 배열 선언
             
@@ -108,10 +157,10 @@ function remove_button_click(){
 				$("#isRemovedThings").val(tdArr);
 			});
 			document.getElementById("isRemoved").value="true";
-			alert("WOW hihi remove : "+tdArr);  
-				
+			alert("삭제된 테스트 : "+tdArr);  
+			
     }else{
-			alert("ㅠㅠ no checked");  
+			alert("삭제할 항목을 선택해주세요");  
             //체크가 안되어있을때.
     }
 }
@@ -133,7 +182,7 @@ function remove_button_click(){
 function restore_button_click(){
 	if ($("input:checkbox[name=restore_CheckBox]").is(":checked") == true) {
 		//체크가 되어있을때. 
-            alert("WOW hihi restore"); 
+            //alert("WOW hihi restore"); 
 			var checkbox = $("input[name=restore_CheckBox]:checked"); 
 			var tdArr = new Array();    // 배열 선언
             
@@ -151,10 +200,10 @@ function restore_button_click(){
 				$("#isRestoredThings").val(tdArr);
 			});
 			document.getElementById("isRestored").value="true";
-			alert("WOW hihi restore : "+tdArr);  
+			alert("복구한 테스트 : "+tdArr);  
 				
     }else{
-			alert("ㅠㅠ no checked");  
+			alert("복구할 항목을 선택해주세요");  
             //체크가 안되어있을때.
     }
 }
@@ -214,6 +263,7 @@ function restore_button_click(){
 			var eReq_atData = td.eq(28).text();
 			var totalSeq = td.eq(29).text();
 			var cycle = td.eq(30).text();
+			var result = td.eq(31).text();
             str +=    " No. : <font color='red'>" + no + "</font>" +
                     ", 테스트코드 : <font color='red'>" + testCode + "</font>" +
                     ", 테스트이름 : <font color='red'>" + testName + "</font>";        
@@ -248,7 +298,8 @@ function restore_button_click(){
 			$("#eReq_atSize").val(eReq_atSize);
 			$("#eReq_atData").val(eReq_atData);
 			$("#totalSeq").val(totalSeq);
-			$("#cycle").val(cycle);				
+			$("#cycle").val(cycle);
+			$("#result").val(result);					
         });
 
 

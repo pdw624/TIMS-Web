@@ -38,7 +38,7 @@ public class ClientMsgHandler {
 	
 	public static void requestGet(Channel ch, TimsConfig timsConfig) {
 		 TimsMessageBuilder builder = new TimsMessageBuilder(timsConfig);
-		 //테스트용으로 101번 요청
+		 //테스트용으로 100번 요청
 	     TimsMessage timsSendMessage = builder.getRequest((short)Integer.parseInt((String) MainController.usableMap.get("gReq_atId")));
 	     logTimsMsg = timsSendMessage;
 	     TransactionManager.write(new TcpChannelMessage(ch, null, timsSendMessage));
@@ -62,8 +62,12 @@ public class ClientMsgHandler {
 		AtTimeStamp atData = new AtTimeStamp(DateTime.now().toString(PlatformConfig.PLF_DT_FORMAT));
 
         TimsMessageBuilder builder = new TimsMessageBuilder(timsConfig);
+        System.out.println("////////////////////////////////////////////////////////////////");
+        System.out.println("atData= " +atData.getLog()+", getAttrId= " +atData.getAttrId());
         TimsMessage timsMessage = builder.setRequest(atData);
 
+        
+        //System.out.println("setRequest log= " +timsMessage.getLog());
         TcpChannelMessage tcpChannelMessage = new TcpChannelMessage(ch, null, timsMessage);
         tcpChannelMessage.setResponse(true);
         TransactionManager.write(tcpChannelMessage);

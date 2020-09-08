@@ -1,8 +1,11 @@
 package com.example.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -38,12 +41,83 @@ public class MainController {
 	@Autowired
 	private HBTService hbt_service;
 	
-	
-	
 	private List<MainVO> testList;
 	private List<HbtVO> hbtList;
 	private List<HbtVO> removedHBTList;
 	public static HashMap<String,Object> usableMap;
+	
+	
+	@RequestMapping("connect")
+	public ResponseEntity<String> connect(@RequestParam HashMap<String, Object> param) throws InterruptedException {
+		
+		String initStrTemp = "";
+		
+		if(param.size() > 0) {
+			for (String key : param.keySet()) {
+			           String value = (String) param.get(key);
+			           System.out.println(key + " = " + value);
+			}
+		}
+		connection(param);
+		
+		while(TimsClientHandlerTest.initStr.contains("PlInitRequest") == false) {
+			System.out.print(".");
+			if(TimsClientHandlerTest.initStr.contains("PlInitRequest") == true) {
+				System.out.println("도착!!");
+				initStrTemp = TimsClientHandlerTest.initStr;
+				System.out.println(TimsClientHandlerTest.initStr);
+				break;
+			}
+		}
+		System.out.println("----------------------------");
+		TimsClientHandlerTest.initStr = "[RCVD Payload] : ";
+		if(initStrTemp!=null) {
+			return new ResponseEntity<>(initStrTemp, HttpStatus.OK);
+		}else {
+			return new ResponseEntity<>("값없음", HttpStatus.OK);
+		}
+		//return new ResponseEntity<>(initStrTemp, HttpStatus.OK);
+	}
+	
+	@RequestMapping("send")
+	public ResponseEntity<String> send(@RequestParam HashMap<String, Object> param) throws InterruptedException {
+		
+		
+		String getStrTemp = "";
+		usableMap = new HashMap<String, Object>(param);
+		if(param.size() > 0) {
+			for (String key : param.keySet()) {
+			           String value = (String) param.get(key);
+			           System.out.println(key + " = " + value);
+			}
+		}
+		
+		if(param.isEmpty()==false && isConnected==true && Boolean.parseBoolean((String) param.get("isSend"))==true) {
+			ClientMsgHandler.msgSelect((String) param.get("opCode"));
+		}
+		
+		String opStr = (String)param.get("opCode");
+		if(opStr.equals("OP_GET_REQ")) {
+			while(TimsClientHandlerTest.getStr.contains("PlGetResponse") == false) {
+				System.out.print(".");
+				if(TimsClientHandlerTest.getStr.contains("PlGetResponse") == true) {
+					System.out.println("도착!!");
+					getStrTemp = TimsClientHandlerTest.getStr;
+					System.out.println(TimsClientHandlerTest.getStr);
+					break;
+				}
+			}
+		}
+		
+		System.out.println("----------------------------");
+		TimsClientHandlerTest.getStr = "[RCVD Payload] : ";
+		if(getStrTemp!=null) {
+			return new ResponseEntity<>(getStrTemp, HttpStatus.OK);
+		}else {
+			return new ResponseEntity<>("값없음", HttpStatus.OK);
+		}
+		//return new ResponseEntity<>(getStrTemp, HttpStatus.OK);
+	}
 	
 	@RequestMapping("/main")
 	public String main(Model model, @RequestParam HashMap<String, Object> map, Model hbtModel) throws Exception {
@@ -60,11 +134,13 @@ public class MainController {
 		System.out.println("----------------------------");
 		
 		//연결
-		connection(usableMap);
+		//connection(usableMap);
+		//연결과 동시에 바로 initRequest를 뷰에 뿌려줌
+		//model.addAttribute("result", TimsClientHandlerTest.initStr);
 		
-		if(map.isEmpty()==false && isConnected==true &&  Boolean.parseBoolean((String) map.get("isSend"))==true) {
-			ClientMsgHandler.msgSelect((String) map.get("opCode"));
-		}
+//		if(map.isEmpty()==false && isConnected==true &&  Boolean.parseBoolean((String) map.get("isSend"))==true) {
+//			ClientMsgHandler.msgSelect((String) map.get("opCode"));
+//		}
 		
 		//웹클라이언트 테이블 갱신
 		tableUpdate(model);
@@ -165,8 +241,6 @@ public class MainController {
 		return result;
 	}
 	
-
-	
 	
 	public void connection(HashMap<String, Object> map) {
 		// 처음 시작할 때 값이 있다면
@@ -174,7 +248,7 @@ public class MainController {
 
 			if (isConnected == false) {
 				// 연결
-				boolean isSend = Boolean.parseBoolean((String) map.get("isSend"));
+				boolean isSend = Boolean.parseBoolean((String) map.get("isConn"));
 				String ip = (String) map.get("ip");
 				int port = Integer.parseInt((String) map.get("port"));
 				// 전송받으면
